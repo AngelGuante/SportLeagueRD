@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="SportLeagueRD.View.TabbedPanes.tbp2"
+            xmlns:pagesChildrends="clr-namespace:SportLeagueRD.View"
+            Title="Sport League RD"
+            BarBackgroundColor="Black"
+            BarTextColor="White">
+
+    <TabbedPage.Children>
+        <pagesChildrends:view_noticias></pagesChildrends:view_noticias>
+
+        <pagesChildrends:view_eventos></pagesChildrends:view_eventos>
+    </TabbedPage.Children>
+
+</TabbedPage>

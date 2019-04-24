@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_registrar"
+             BackgroundImage="BG_acceso_1.JPG"
+             Title="Sport League RD">
+
+    <AbsoluteLayout>
+        <!--ICONO DE LA APLICACION-->
+        <Image  Source="Logo_Acceso.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".5, .0, .28, .28"
+                AbsoluteLayout.LayoutFlags="All"/>
+        <!--ICONO DE LA APLICACION-->
+
+        <Label Text="Crear Cuenta   "
+               TextColor="White"
+               XAlign="End"
+               AbsoluteLayout.LayoutBounds="1, .305, 1, .1"
+               AbsoluteLayout.LayoutFlags="All"/>
+
+        <!--FRAME QUE CONTIENE LA INFORMACION PARA CREAR EL NUEVO USUARIO-->
+        <Frame CornerRadius="10"
+               Opacity="0.7"
+               AbsoluteLayout.LayoutBounds=".5, .64, .95, .52"
+               AbsoluteLayout.LayoutFlags="All">
+            <AbsoluteLayout>
+                <Entry Placeholder="Nombre"
+                       Style="{StaticResource style_entry1}"
+                       AbsoluteLayout.LayoutBounds=".5, 0, 1, .2"
+                       AbsoluteLayout.LayoutFlags="All"/>
+
+                <Entry Placeholder="Apellido"
+                       Style="{StaticResource style_entry1}"
+                       AbsoluteLayout.LayoutBounds=".5, .2, 1, .2"
+                       AbsoluteLayout.LayoutFlags="All"/>
+
+                <Entry Placeholder="Correo"
+                       Keyboard="Email"
+                       Style="{StaticResource style_entry1}"
+                       AbsoluteLayout.LayoutBounds=".5, .4, 1, .2"
+                       AbsoluteLayout.LayoutFlags="All"/>
+
+                <Entry Placeholder="Contraseña"
+                       IsPassword="True"
+                       Style="{StaticResource style_entry1}"
+                       AbsoluteLayout.LayoutBounds=".5, .6, 1, .2"
+                       AbsoluteLayout.LayoutFlags="All"/>
+
+                <Entry Placeholder="Repetir Contraseña"
+                       IsPassword="True"
+                       Style="{StaticResource style_entry1}"
+                       AbsoluteLayout.LayoutBounds=".5, .8, 1, .2"
+                       AbsoluteLayout.LayoutFlags="All"/>
+
+                <Button Text="CREAR"
+                        Style="{StaticResource style_buttons1}"
+                        BackgroundColor="{StaticResource verde}"
+                        AbsoluteLayout.LayoutBounds=".5, 1, 1, .14"
+                        AbsoluteLayout.LayoutFlags="All"/>
+            </AbsoluteLayout>
+        </Frame>
+        <!--FRAME QUE CONTIENE LA INFORMACION PARA CREAR EL NUEVO USUARIO-->
+
+        <Label Text="O"
+               TextColor="White"
+               XAlign="Center"
+               AbsoluteLayout.LayoutBounds="1, 1, 1, .16"
+               AbsoluteLayout.LayoutFlags="All"/>
+
+        <!--FRAME QUE CONTIENE LAS REDES SOCIALES CON LAS QUE SE PUEDE REGISTRAR-->
+        <Frame CornerRadius="10"
+               Opacity="0.7"
+               AbsoluteLayout.LayoutBounds=".5, 1, .95, .13"
+               AbsoluteLayout.LayoutFlags="All">
+            <AbsoluteLayout>
+                <Button Text="FACEBOOK"
+                        Style="{StaticResource style_buttons1}"
+                        BackgroundColor="#3b5998"
+                        AbsoluteLayout.LayoutBounds="0, 0, .48, 1"
+                        AbsoluteLayout.LayoutFlags="All"/>
+
+                <Button Text="GOOGLE"
+                        Style="{StaticResource style_buttons1}"
+                        BackgroundColor="#d62d20"
+                        AbsoluteLayout.LayoutBounds="1, 0, .48, 1"
+                        AbsoluteLayout.LayoutFlags="All"/>
+            </AbsoluteLayout>
+        </Frame>
+        <!--FRAME QUE CONTIENE LAS REDES SOCIALES CON LAS QUE SE PUEDE REGISTRAR-->
+    </AbsoluteLayout>
+
+</ContentPage>

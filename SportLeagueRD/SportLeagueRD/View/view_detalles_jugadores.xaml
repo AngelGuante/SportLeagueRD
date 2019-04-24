@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_detalles_jugadores"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             BackgroundColor="{StaticResource gris}">
+
+    <StackLayout>
+        <Frame Margin="6"
+               Padding="0"
+               BackgroundColor="White"
+               BorderColor="Black">
+            <StackLayout>
+                <Label Text="  DATOS DEL JUGADOR"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       BackgroundColor="Black"
+                       LineBreakMode="NoWrap"/>
+                <StackLayout Orientation="Horizontal"
+                             Margin="0"
+                             Spacing="0">
+                    <ffimageloading:CachedImage Source="{Binding _source}"
+                                                HeightRequest="140"
+                                                WidthRequest="140"
+                                                DownsampleToViewSize="True"
+                                                Margin="2"/>
+                    <StackLayout>
+                        <Label Text="{Binding _nombreCompleto}"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+
+                        <ScrollView>
+                            <StackLayout>
+                                <Label Text="{Binding _fechaNacimientoEdad}"
+                                       FontAttributes="Bold"/>
+
+                                <Label Text="{Binding _nomreEquipoYSigla}"
+                                       TextColor="{StaticResource azul}">
+                                    <Label.Effects>
+                                        <customControls:UnderlineEffect />
+                                    </Label.Effects>
+
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding _label_equipo}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label Text="{Binding _fechaIngreso, StringFormat='Ingreso: {0:F0}'}"
+                                       FontAttributes="Bold"/>
+
+                                <Label Text="{Binding _posicion, StringFormat='Posicion: {0:F0}'}"
+                                       FontAttributes="Bold"/>
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <StackLayout HeightRequest="600"
+                     BackgroundColor="White">
+            <Label Text="Ver Equipos"
+                   XAlign="Center"
+                   IsVisible="{Binding _verEquiposClickeado}"
+                   TextColor="{StaticResource azul}">
+                <Label.Effects>
+                    <customControls:UnderlineEffect />
+                </Label.Effects>
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding _label_verEquipos}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <!--LISTVIEW QUE MUESTRA TODOS LOS EQUIPOS DEL JUGADOR-->
+            <customControls:ItemSelectedListView ItemsSource="{Binding _equipos}"
+                                                 ItemClickCommand="{Binding _elementoSeleccionado}">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal">
+                                    <BoxView WidthRequest="2"/>
+                                    <Label Text="{Binding _nombreEquipo}"
+                                           HorizontalOptions="StartAndExpand"
+                                           TextColor="{StaticResource colorPrimario}"/>
+                                    <Label Text="{Binding _siglas}"
+                                           HorizontalOptions="CenterAndExpand"
+                                           TextColor="{StaticResource colorPrimario}"/>
+                                    <Label Text="Ver Estadisticas"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="{StaticResource azul}">
+                                        <Label.Effects>
+                                            <customControls:UnderlineEffect />
+                                        </Label.Effects>
+                                    </Label>
+                                    <BoxView WidthRequest="2"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </customControls:ExtendedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </customControls:ItemSelectedListView><!--LISTVIEW QUE MUESTRA TODOS LOS EQUIPOS DEL JUGADOR-->
+
+        </StackLayout>
+
+        <StackLayout VerticalOptions="End"
+                     Orientation="Horizontal">
+            <Label Text="{Binding _votos, StringFormat=' {0:F0} VOTOS'}"
+                   FontAttributes="Bold"
+                   Margin="6"
+                   TextColor="{StaticResource verde}"
+                   FontSize="Large"
+                   YAlign="Center"
+                   HorizontalOptions="StartAndExpand"/>
+            <Button Text="VOTAR"
+                    Margin="6"
+                    Command="{Binding _btn_votar}"
+                    HorizontalOptions="EndAndExpand"
+                    BackgroundColor="{StaticResource verde}"
+                    Style="{StaticResource style_buttons1}"/>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

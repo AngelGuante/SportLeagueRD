@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_calendario"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             Title="CALENDARIO"
+             BackgroundColor="{StaticResource gris}">
+    <Grid>
+        <StackLayout CompressedLayout.IsHeadless="True"
+                     Spacing="0">
+
+            <!--BARRA DE FECHA-->
+            <Frame Margin="4"
+                   Padding="0"
+                   Opacity="0.6"
+                   IsVisible="{Binding IsBusy, Converter={customControls:InverseBoolConverter}}">
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0">
+                <Button BackgroundColor="White"
+                        HeightRequest="50"
+                        Command="{Binding _btn_fechaAnterior}"
+                        CommandParameter="-1"
+                        Image="leftarrow"/>
+
+                <DatePicker x:Name="picker"
+                            Date="{Binding _fechaBuscador}"
+                            Format="ddd dd/MM/yyyy"
+                            BackgroundColor="White"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource rojo}"
+                            FontSize="Small"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="FillAndExpand"/>
+
+                <Button BackgroundColor="White"
+                        HeightRequest="50"
+                        Command="{Binding _btn_fechaAnterior}"
+                        CommandParameter="1"
+                        Image="rightarrow"/>
+                </StackLayout>
+            </Frame>
+            <!--BARRA DE FECHA-->
+
+            <customControls:ItemSelectedListView ItemTemplate="{StaticResource partidosDataTemplateSelector}"
+                                                 ItemClickCommand="{Binding _elementoSeleccionado}"
+                                                 ItemsSource="{Binding _lista}"
+                                                 SeparatorColor="{StaticResource rojo}"
+                                                 HasUnevenRows="True">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.Footer>
+                    <StackLayout BackgroundColor="Black"
+                                 IsVisible="{Binding _hayPartidosEnFecha}">
+                        <Label Text="NO HAY PARTIDO EN ESTA FECHA"
+                               Margin="4"
+                               FontSize="Small"
+                               FontAttributes="Bold"
+                               XAlign="Center"
+                               TextColor="White"/> 
+                    </StackLayout>
+                </ListView.Footer>
+
+            </customControls:ItemSelectedListView>
+    </StackLayout>
+
+        <Grid BackgroundColor="White"
+              IsVisible="{Binding IsBusy}">
+            <StackLayout CompressedLayout.IsHeadless="True">
+                <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"/>
+                <Label Text="Cargando Calendario.."
+                       XAlign="Center"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+        
+</ContentPage>

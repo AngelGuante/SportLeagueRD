@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_rankingEquios"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:infinite="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             Title="Equipos"
+             BackgroundColor="{StaticResource gris}">
+    <Grid>
+        <StackLayout Spacing="0" CompressedLayout.IsHeadless="True">
+            <Label Text="Ranking De Equipos  "
+                   TextColor="White"
+                   BackgroundColor="Black"
+                   LineBreakMode="NoWrap"
+                   XAlign="End"/>
+
+            <StackLayout>
+                <Button Text="VER TODOS LOS EQUIPOS"
+                        BackgroundColor="White"
+                        Command="{Binding _verTodosEquipos}"
+                        IsVisible="{Binding _verTodo, Converter={customControls:InverseBoolConverter}}"/>
+                <!--CONTIENE EL CUADRO DONDE EL USUARIO PUEDE ESCRIBIR SU BUSQUEDA Y EL BOTON DE ENVIAR-->
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0"
+                             BackgroundColor="White"
+                             IsVisible="{Binding  _verTodo}">
+                    <Entry Placeholder="Buscar Equipo"
+                           Text="{Binding _parametroEquipoABuscar}"
+                           TextColor="{StaticResource rojo}"
+                           HorizontalOptions="FillAndExpand"/>
+                    <Grid Margin="1">
+                        <ffimageloading:CachedImage Source="searchButton"
+                                                WidthRequest="40"
+                                                HeightRequest="40"
+                                                DownsampleToViewSize="True"/>
+                        <Button CornerRadius="90"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                Command="{Binding _btn_buscar}" 
+                                Opacity="0.2"/>
+                    </Grid>
+                    <BoxView WidthRequest="4"/>
+                </StackLayout>
+                <!--CONTIENE EL CUADRO DONDE EL USUARIO PUEDE ESCRIBIR SU BUSQUEDA Y EL BOTON DE ENVIAR-->
+            </StackLayout>
+
+            <customControls:ItemSelectedListView ItemsSource="{Binding _lista}"
+                                                 ItemClickCommand="{Binding _elementoSeleccionado}"
+                                                 HasUnevenRows="True">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.Behaviors>
+                    <infinite:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}"/>
+                </ListView.Behaviors>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource gris}">
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ffimageloading:CachedImage Source="{Binding _source}"
+                                                                Aspect="AspectFit"
+                                                                HeightRequest="100"
+                                                                DownsampleToViewSize="True"/>
+                                    <StackLayout Grid.Column="1" Grid.ColumnSpan="2"
+                                                 VerticalOptions="Center">
+                                        <Label Text="{Binding _nombreEquipo}"
+                                           TextColor="Black"
+                                           YAlign="Center"/>
+                                        <Label Text="{Binding _siglas, StringFormat='@{0:F0}'}"
+                                           LineBreakMode="NoWrap"
+                                           TextColor="Black"
+                                           YAlign="Center"/>
+                                    </StackLayout>
+
+                                    <Label Grid.Column="3" Grid.ColumnSpan="2"
+                                       Text="{Binding _votos, StringFormat=' {0:F0} VOTOS'}"
+                                       LineBreakMode="NoWrap"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       YAlign="Center"
+                                       XAlign="Center"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </customControls:ExtendedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Header>
+                    <Label Text="LOS MAS VOTADOS "
+                       XAlign="End"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+                </ListView.Header>
+            </customControls:ItemSelectedListView>
+        </StackLayout>
+        
+        <Grid BackgroundColor="White"
+              IsVisible="{Binding IsBusy}">
+            <StackLayout CompressedLayout.IsHeadless="True">
+                <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"/>
+                <Label Text="Cargando Equipos.."
+                       XAlign="Center"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

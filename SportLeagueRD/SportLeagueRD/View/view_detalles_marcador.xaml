@@ -1,0 +1,589 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_detalles_marcador"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             BackgroundColor="{StaticResource gris}">
+
+    <Grid>
+        <ScrollView>
+            <StackLayout>
+
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0">
+
+                    <StackLayout Spacing="0"
+                                 WidthRequest="100"
+                                 BackgroundColor="{StaticResource azul}"> 
+                        
+                        <Label Text="--"
+                               BackgroundColor="{StaticResource verde}"
+                               TextColor="{StaticResource verde}"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+							   HorizontalTextAlignment="Center"
+                               LineBreakMode="MiddleTruncation"/>
+
+                        <StackLayout Orientation="Horizontal">
+                            <ffimageloading:CachedImage Source="{Binding _sourceA}"
+                                                HeightRequest="35"
+                                                WidthRequest="35"
+                                                DownsampleToViewSize="True"
+                                                HorizontalOptions="CenterAndExpand"/>
+                            <Label Text="{Binding _puntuacionEquipoA}"
+                                   YAlign="Center"
+                                   FontSize="Small"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalTextAlignment="Center"
+							       HorizontalTextAlignment="Center"
+                                   LineBreakMode="MiddleTruncation"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <ffimageloading:CachedImage Source="{Binding _sourceB}"
+                                                HeightRequest="35"
+                                                WidthRequest="35"
+                                                DownsampleToViewSize="True"
+                                                HorizontalOptions="CenterAndExpand"/>
+                            <Label Text="{Binding _puntuacionEquipoB}"
+                                   YAlign="Center"
+                                   FontSize="Small"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalTextAlignment="Center"
+							       HorizontalTextAlignment="Center"
+                                   LineBreakMode="MiddleTruncation"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <RelativeLayout Grid.Row="1" 
+							        HeightRequest="100"
+							        VerticalOptions="Start">
+                        <ListView Rotation="270" ItemsSource="{Binding _puntuaciones}" RowHeight="100" SeparatorVisibility="None" BackgroundColor="White"
+                                  RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-50}"
+                                  RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=-0.5, Constant=50}"
+                                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=100}"
+                                  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                                  CachingStrategy="RecycleElement">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource rojo}">
+                                        <ContentView  Rotation="90" BackgroundColor="Transparent">
+                                            <StackLayout HeightRequest="90">
+                                                <Label Text="{Binding _cuarto}"
+                                                       BackgroundColor="{StaticResource verde}"
+                                                       TextColor="White"
+                                                       FontSize="Medium"
+                                                       FontAttributes="Bold"
+										               HorizontalTextAlignment="Center"
+                                                       LineBreakMode="MiddleTruncation"/>
+                                                <Label Text="{Binding _puntos_EquipoA}"
+                                                       TextColor="Black"
+                                                       FontAttributes="Bold"
+										               HorizontalTextAlignment="Center"
+                                                       LineBreakMode="MiddleTruncation"/>
+                                                <Label Text="{Binding _puntos_EquipoB}"
+                                                       TextColor="Black"
+                                                       FontAttributes="Bold"
+										               HorizontalTextAlignment="Center"
+                                                       LineBreakMode="MiddleTruncation"/>
+                                            </StackLayout>
+                                        </ContentView>
+                                    </customControls:ExtendedViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </RelativeLayout>
+
+                </StackLayout>
+                <!--MUESTRA LA PUNTUACION DEL PARTIDO EN CADA CUARTO-->
+
+                <!--FRAME QUE CONTIENE LOS LIDERES DEL PARTIDO-->
+                <Frame Padding="12"
+                   Margin="10"
+                   BackgroundColor="White">
+                    <StackLayout Spacing="0">
+                        <!--IMAGENS SIGLAS Y SWICHER DE LOS EQUIPOS-->
+                        <StackLayout Orientation="Horizontal">
+                            <ffimageloading:CachedImage Source="{Binding _sourceA}"
+                                                        Margin="4"
+                                                        HeightRequest="40"
+                                                        DownsampleToViewSize="True"
+                                                        HorizontalOptions="StartAndExpand"/>
+                            <Label Text="{Binding _siglasA, StringFormat='@{0:F0}'}"
+                                   YAlign="Center"
+                                   TextColor="{StaticResource azul}"
+                                   HorizontalOptions="StartAndExpand">
+                                <Label.Effects>
+                                    <customControls:UnderlineEffect />
+                                </Label.Effects>
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding _label_siglasA}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Switch HorizontalOptions="CenterAndExpand"
+                                    OnColor="{StaticResource rojo}"
+                                    IsToggled="{Binding _switcherValue}"/>
+
+                            <Label Text="{Binding _siglasB, StringFormat='@{0:F0}'}"
+                                   YAlign="Center"
+                                   TextColor="{StaticResource azul}"
+                                   HorizontalOptions="EndAndExpand">
+                                <Label.Effects>
+                                    <customControls:UnderlineEffect />
+                                </Label.Effects>
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding _label_siglasB}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <ffimageloading:CachedImage Source="{Binding _sourceB}"
+                                                        Margin="4"
+                                                        HeightRequest="40"
+                                                        DownsampleToViewSize="True"
+                                                        HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                        <!--IMAGENS SIGLAS Y SWICHER DE LOS EQUIPOS-->
+
+                        <!--FRAME QUE MUESTRA LOS LIDERES EN PUNTOS-->
+                        <Frame Padding="0"
+                               BackgroundColor="{StaticResource verde}"
+                               HeightRequest="120">
+                            <StackLayout Spacing="0">
+                                <Label Text="  LIDERES EN PUNTOS"
+                                   TextColor="White"
+                                   BackgroundColor="Black"/>
+
+                                <BoxView HeightRequest="2"/>
+
+                                <!--EQUIPO A-->
+                                <customControls:ItemSelectedListView ItemClickCommand="{Binding _elementoSeleccionado_puntos}"
+                                                                 ItemsSource="{Binding _lista_lideresPuntosA}"
+                                                                 VerticalOptions="Fill"
+                                                                 SeparatorVisibility="None"
+                                                                 IsVisible="{Binding _switcherValue, Converter={customControls:InverseBoolConverter}}">
+                                    <x:Arguments>
+                                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                                    </x:Arguments>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource verde}">
+                                                <ViewCell.View>
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 Spacing="0">
+                                                        <ffimageloading:CachedImage Source="{Binding _sourceJugadorA}"
+                                                                                HeightRequest="80"
+                                                                                WidthRequest="80"
+                                                                                DownsampleToViewSize="True"
+                                                                                HorizontalOptions="Start"/>
+                                                        <StackLayout HorizontalOptions="Start"
+                                                                     Spacing="2">
+                                                            <StackLayout Orientation="Horizontal"
+                                                                         Spacing="2">
+                                                                <Label Text="{Binding _nombreJugadorA}"
+                                                                       TextColor="Black"/>
+                                                                <Label Text="{Binding _apellidoJugadorA}"
+                                                                       TextColor="Black"/>
+                                                            </StackLayout>
+                                                            <Label Text="{Binding _posicionJugadorA}"/>
+                                                        </StackLayout>
+                                                        <Label Text="{Binding _totalJugadorA}"
+                                                           HorizontalOptions="EndAndExpand"
+                                                           TextColor="Black"
+                                                           FontAttributes="Bold"
+                                                           FontSize="Large"
+                                                           YAlign="Center"/>
+                                                        <BoxView WidthRequest="6"/>
+                                                    </StackLayout>
+                                                </ViewCell.View>
+                                            </customControls:ExtendedViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </customControls:ItemSelectedListView>
+                                <!--EQUIPO A-->
+
+                                <!--EQUIPO B-->
+                                <customControls:ItemSelectedListView ItemClickCommand="{Binding _elementoSeleccionado_puntos}"
+                                                                     ItemsSource="{Binding _lista_lideresPuntosB}"
+                                                                     VerticalOptions="Fill"
+                                                                     SeparatorVisibility="None"
+                                                                     IsVisible="{Binding _switcherValue}">
+                                    <x:Arguments>
+                                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                                    </x:Arguments>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource verde}">
+                                                <ViewCell.View>
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 Spacing="0">
+                                                        <BoxView WidthRequest="6"/>
+                                                        <Label Text="{Binding _totalJugadorB}"
+                                                               HorizontalOptions="StartAndExpand"
+                                                               TextColor="Black"
+                                                               FontAttributes="Bold"
+                                                               FontSize="Large"
+                                                               YAlign="Center"/>
+                                                        <StackLayout HorizontalOptions="End"
+                                                                     Spacing="2">
+                                                            <StackLayout Orientation="Horizontal"
+                                                                         Spacing="2"
+                                                                         HorizontalOptions="End">
+                                                                <Label Text="{Binding _nombreJugadorB}"
+                                                                       TextColor="Black"
+                                                                       HorizontalOptions="End"/>
+                                                                <Label Text="{Binding _apellidoJugadorB}"
+                                                                       TextColor="Black"/>
+                                                            </StackLayout>
+                                                            <Label Text="{Binding _posicionJugadorB}"
+                                                                   XAlign="End"/>
+                                                        </StackLayout>
+                                                        <ffimageloading:CachedImage Source="{Binding _sourceJugadorB}"
+                                                                                    HeightRequest="80"
+                                                                                    WidthRequest="80"
+                                                                                    DownsampleToViewSize="True"
+                                                                                    HorizontalOptions="Start"/>
+                                                    </StackLayout>
+                                                </ViewCell.View>
+                                            </customControls:ExtendedViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </customControls:ItemSelectedListView>
+                                <!--EQUIPO B-->
+                            </StackLayout>
+                        </Frame>
+                        
+                        <Label Text="VER TODAS LAS ESTADISTICAS DE TIRO"
+                                   TextColor="{StaticResource azul}"
+                                   FontSize="Small"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="EndAndExpand">
+                            <Label.Effects>
+                                <customControls:UnderlineEffect />
+                            </Label.Effects>
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding _label_verTodo_tiro}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <!--FRAME QUE MUESTRA LOS LIDERES EN REBOTES-->
+
+                        <BoxView HeightRequest="20"/>
+
+                        <!--FRAME QUE MUESTRA LOS LIDERES EN REBOTES-->
+                        <Frame Padding="0"
+                               BackgroundColor="{StaticResource verde}"
+                               HeightRequest="120">
+                            <StackLayout Spacing="0">
+                                <Label Text="  LIDERES EN REBOTES"
+                                   TextColor="White"
+                                   BackgroundColor="Black"/>
+
+                                <BoxView HeightRequest="2"/>
+
+                                <!--EQUIPO A-->
+                                <customControls:ItemSelectedListView ItemClickCommand="{Binding _elementoSeleccionado_general}"
+                                                                 ItemsSource="{Binding _lista_lideresRebotesA}"
+                                                                 VerticalOptions="Fill"
+                                                                 SeparatorVisibility="None"
+                                                                 IsVisible="{Binding _switcherValue, Converter={customControls:InverseBoolConverter}}">
+                                    <x:Arguments>
+                                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                                    </x:Arguments>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource verde}">
+                                                <ViewCell.View>
+                                                    <StackLayout Orientation="Horizontal"
+                                                             Spacing="0">
+                                                        <ffimageloading:CachedImage Source="{Binding _sourceJugadorA}"
+                                                                                HeightRequest="80"
+                                                                                WidthRequest="80"
+                                                                                DownsampleToViewSize="True"
+                                                                                HorizontalOptions="Start"/>
+                                                        <StackLayout HorizontalOptions="Start"
+                                                                 Spacing="2">
+                                                            <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                                <Label Text="{Binding _nombreJugadorA}"
+                                                                   TextColor="Black"/>
+                                                                <Label Text="{Binding _apellidoJugadorA}"
+                                                                   TextColor="Black"/>
+                                                            </StackLayout>
+                                                            <Label Text="{Binding _posicionJugadorA}"/>
+                                                        </StackLayout>
+                                                        <Label Text="{Binding _totalJugadorA}"
+                                                           HorizontalOptions="EndAndExpand"
+                                                           TextColor="Black"
+                                                           FontAttributes="Bold"
+                                                           FontSize="Large"
+                                                           YAlign="Center"/>
+                                                        <BoxView WidthRequest="6"/>
+                                                    </StackLayout>
+                                                </ViewCell.View>
+                                            </customControls:ExtendedViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </customControls:ItemSelectedListView>
+                                <!--EQUIPO A-->
+
+                                <!--EQUIPO B-->
+                                <customControls:ItemSelectedListView ItemClickCommand="{Binding _elementoSeleccionado_general}"
+                                                                 ItemsSource="{Binding _lista_lideresRebotesB}"
+                                                                 VerticalOptions="Fill"
+                                                                 SeparatorVisibility="None"
+                                                                 IsVisible="{Binding _switcherValue}">
+                                    <x:Arguments>
+                                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                                    </x:Arguments>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource verde}">
+                                                <ViewCell.View>
+                                                    <StackLayout Orientation="Horizontal"
+                                                             Spacing="0">
+                                                        <BoxView WidthRequest="6"/>
+                                                        <Label Text="{Binding _totalJugadorB}"
+                                                           HorizontalOptions="StartAndExpand"
+                                                           TextColor="Black"
+                                                           FontAttributes="Bold"
+                                                           FontSize="Large"
+                                                           YAlign="Center"/>
+                                                        <BoxView WidthRequest="6"/>
+                                                        <StackLayout HorizontalOptions="Start"
+                                                                 Spacing="2">
+                                                            <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                                <Label Text="{Binding _nombreJugadorB}"
+                                                                   TextColor="Black"/>
+                                                                <Label Text="{Binding _apellidoJugadorB}"
+                                                                   TextColor="Black"/>
+                                                            </StackLayout>
+                                                            <Label Text="{Binding _posicionJugadorB}"
+                                                               XAlign="End"/>
+                                                        </StackLayout>
+                                                        <ffimageloading:CachedImage Source="{Binding _sourceJugadorB}"
+                                                                                HeightRequest="80"
+                                                                                WidthRequest="80"
+                                                                                DownsampleToViewSize="True"
+                                                                                HorizontalOptions="Start"/>
+                                                    </StackLayout>
+                                                </ViewCell.View>
+                                            </customControls:ExtendedViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </customControls:ItemSelectedListView>
+                                <!--EQUIPO B-->
+                            </StackLayout>
+                        </Frame>
+                        <!--FRAME QUE MUESTRA LOS LIDERES EN PUNTOS-->
+
+                        <!--FRAME QUE MUESTRA LOS LIDERES EN ASISTENCIAS-->
+                        <Frame Padding="0"
+                               BackgroundColor="{StaticResource verde}"
+                               HeightRequest="120">
+                            <StackLayout Spacing="0">
+                                <Label Text="  LIDERES EN ASISTENCIAS"
+                                   TextColor="White"
+                                   BackgroundColor="Black"/>
+
+                                <BoxView HeightRequest="2"/>
+
+                                <!--EQUIPO A-->
+                                <customControls:ItemSelectedListView ItemClickCommand="{Binding _elementoSeleccionado_general}"
+                                                                 ItemsSource="{Binding _lista_lideresAsistenciasA}"
+                                                                 VerticalOptions="Fill"
+                                                                 SeparatorVisibility="None"
+                                                                 IsVisible="{Binding _switcherValue, Converter={customControls:InverseBoolConverter}}">
+                                    <x:Arguments>
+                                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                                    </x:Arguments>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource verde}">
+                                                <ViewCell.View>
+                                                    <StackLayout Orientation="Horizontal"
+                                                             Spacing="0">
+                                                        <ffimageloading:CachedImage Source="{Binding _sourceJugadorA}"
+                                                                                HeightRequest="80"
+                                                                                WidthRequest="80"
+                                                                                DownsampleToViewSize="True"
+                                                                                HorizontalOptions="Start"/>
+                                                        <StackLayout HorizontalOptions="Start"
+                                                                 Spacing="2">
+                                                            <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                                <Label Text="{Binding _nombreJugadorA}"
+                                                                   TextColor="Black"/>
+                                                                <Label Text="{Binding _apellidoJugadorA}"
+                                                                   TextColor="Black"/>
+                                                            </StackLayout>
+                                                            <Label Text="{Binding _posicionJugadorA}"/>
+                                                        </StackLayout>
+                                                        <Label Text="{Binding _totalJugadorA}"
+                                                           HorizontalOptions="EndAndExpand"
+                                                           TextColor="Black"
+                                                           FontAttributes="Bold"
+                                                           FontSize="Large"
+                                                           YAlign="Center"/>
+                                                        <BoxView WidthRequest="6"/>
+                                                    </StackLayout>
+                                                </ViewCell.View>
+                                            </customControls:ExtendedViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </customControls:ItemSelectedListView>
+                                <!--EQUIPO A-->
+
+                                <!--EQUIPO B-->
+                                <customControls:ItemSelectedListView ItemClickCommand="{Binding _elementoSeleccionado_general}"
+                                                                 ItemsSource="{Binding _lista_lideresAsistenciasB}"
+                                                                 VerticalOptions="Fill"
+                                                                 SeparatorVisibility="None"
+                                                                 IsVisible="{Binding _switcherValue}">
+                                    <x:Arguments>
+                                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                                    </x:Arguments>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource verde}">
+                                                <ViewCell.View>
+                                                    <StackLayout Orientation="Horizontal"
+                                                             Spacing="0">
+                                                        <BoxView WidthRequest="6"/>
+                                                        <Label Text="{Binding _totalJugadorB}"
+                                                           HorizontalOptions="StartAndExpand"
+                                                           TextColor="Black"
+                                                           FontAttributes="Bold"
+                                                           FontSize="Large"
+                                                           YAlign="Center"/>
+                                                        <BoxView WidthRequest="6"/>
+                                                        <StackLayout HorizontalOptions="Start"
+                                                                 Spacing="2">
+                                                            <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                                <Label Text="{Binding _nombreJugadorB}"
+                                                                   TextColor="Black"/>
+                                                                <Label Text="{Binding _apellidoJugadorB}"
+                                                                   TextColor="Black"/>
+                                                            </StackLayout>
+                                                            <Label Text="{Binding _posicionJugadorB}"
+                                                               XAlign="End"/>
+                                                        </StackLayout>
+                                                        <ffimageloading:CachedImage Source="{Binding _sourceJugadorB}"
+                                                                                HeightRequest="80"
+                                                                                WidthRequest="80"
+                                                                                DownsampleToViewSize="True"
+                                                                                HorizontalOptions="Start"/>
+                                                    </StackLayout>
+                                                </ViewCell.View>
+                                            </customControls:ExtendedViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </customControls:ItemSelectedListView>
+                                <!--EQUIPO B-->
+                            </StackLayout>
+                        </Frame>
+                        
+                        <Label Text="VER TODAS LAS ESTADISTICAS GENERALES"
+                               TextColor="{StaticResource azul}"
+                               FontSize="Small"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="EndAndExpand">
+                            <Label.Effects>
+                                <customControls:UnderlineEffect />
+                            </Label.Effects>
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding _label_verTodo_general}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <!--FRAME QUE MUESTRA LOS LIDERES EN ASISTENCIAS-->
+
+                    </StackLayout>
+                </Frame>
+                <!--FRAME QUE CONTIENE LOS LIDERES DEL PARTIDO-->
+
+                <!--FRAME QUE CONTIENE LO MAS DESTACADO-->
+                <Frame Margin="10"
+                   Padding="0"
+                   BackgroundColor="White">
+                    <StackLayout>
+                        <Label Text="  LO MAS DESTACADO"
+                               TextColor="White"
+                               BackgroundColor="Black"/>
+                        <!--EQUIPO A-->
+                        <ListView ItemsSource="{Binding _lista_loMasDestacadoA}"
+                              SeparatorVisibility="None"
+                              HasUnevenRows="True"
+                              IsVisible="{Binding _switcherValue, Converter={customControls:InverseBoolConverter}}">
+                            <x:Arguments>
+                                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                            </x:Arguments>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource verde}">
+                                        <ViewCell.View>
+                                            <WebView Source="{Binding _loMasDestacadoA}"
+                                                     HeightRequest="200"/>
+                                        </ViewCell.View>
+                                    </customControls:ExtendedViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <!--EQUIPO A-->
+
+                        <!--EQUIPO B-->
+                        <ListView ItemsSource="{Binding _lista_loMasDestacadoB}"
+                              SeparatorVisibility="None"
+                              HasUnevenRows="True"
+                              IsVisible="{Binding _switcherValue}">
+                            <x:Arguments>
+                                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                            </x:Arguments>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource verde}">
+                                        <ViewCell.View>
+                                            <WebView Source="{Binding _loMasDestacadoB}"
+                                                 HeightRequest="200"/>
+                                        </ViewCell.View>
+                                    </customControls:ExtendedViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <!--EQUIPO B-->
+                    </StackLayout>
+                </Frame>
+                <!--FRAME QUE CONTIENE LO MAS DESTACADO-->
+            </StackLayout>
+        </ScrollView>
+
+        <Grid BackgroundColor="White"
+              IsVisible="{Binding IsBusy}">
+            <StackLayout CompressedLayout.IsHeadless="True">
+                <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"/>
+                <Label Text="Cargando Detalles.."
+                       XAlign="Center"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>

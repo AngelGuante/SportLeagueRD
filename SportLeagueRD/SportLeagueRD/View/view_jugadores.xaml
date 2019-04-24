@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_jugadores"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             BackgroundColor="{StaticResource gris}"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:infinite="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             Title="Jugadores">
+    <Grid>
+        <StackLayout Spacing="0" CompressedLayout.IsHeadless="True">
+            <Label Text="Jugadores  "
+                   BackgroundColor="Black"
+                   LineBreakMode="NoWrap"
+                   TextColor="White"
+                   XAlign="End"/>
+
+            <StackLayout>
+                <Button Text="VER TODOS LOS JUGADORES"
+                        BackgroundColor="White"
+                        Command="{Binding _verTodosJugadores}"
+                        IsVisible="{Binding _verTodo, Converter={customControls:InverseBoolConverter}}"/>
+                        <!--CONTIENE EL CUADRO DONDE EL USUARIO PUEDE ESCRIBIR SU BUSQUEDA Y EL BOTON DE ENVIAR-->
+                        <StackLayout Orientation="Horizontal"
+                                     Spacing="0"
+                                     BackgroundColor="White"
+                                     IsVisible="{Binding  _verTodo}">
+                            <Entry Placeholder="Buscar Jugador"
+                                   Text="{Binding _parametroJugadorABuscar}"
+                                   TextColor="{StaticResource rojo}"
+                                   HorizontalOptions="FillAndExpand"/>
+                            <Grid Margin="1">
+                                <ffimageloading:CachedImage Source="searchButton"
+                                                            WidthRequest="40"
+                                                            HeightRequest="40"
+                                                            DownsampleToViewSize="True"/>
+                                <Button CornerRadius="90"
+                                        HeightRequest="40"
+                                        WidthRequest="40"
+                                        Command="{Binding _btn_buscar}"
+                                        Opacity="0.2"/>
+                            </Grid>
+                            <BoxView WidthRequest="4"/>
+                        </StackLayout>
+                        <!--CONTIENE EL CUADRO DONDE EL USUARIO PUEDE ESCRIBIR SU BUSQUEDA Y EL BOTON DE ENVIAR-->
+            </StackLayout>
+
+            <customControls:ItemSelectedListView ItemsSource="{Binding _lista}"
+                                                 ItemClickCommand="{Binding _elementoSeleccionado}"
+                                                 HasUnevenRows="True">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+
+                <ListView.Behaviors>
+                    <infinite:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}"/>
+                </ListView.Behaviors>
+                
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource gris}">
+                        <ViewCell.View>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                    <ffimageloading:CachedImage Source="{Binding _source}"
+                                                                HeightRequest="80"
+                                                                DownsampleToViewSize="true"
+                                                                Margin="6">
+                                        <ffimageloading:CachedImage.Transformations>
+                                            <fftransformations:RoundedTransformation Radius="140"/>
+                                        </ffimageloading:CachedImage.Transformations>
+                                    </ffimageloading:CachedImage>
+
+                                    <StackLayout Grid.Column="1" Grid.ColumnSpan="2"
+                                                 VerticalOptions="Center">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding _nombreJugador}"
+                                                   TextColor="Black"
+                                                   YAlign="Center"/>
+                                            <Label Text="{Binding _apellidoJugador}"
+                                                   TextColor="Black"
+                                                   YAlign="Center"/>
+                                        </StackLayout>
+                                    <Label Text="{Binding _posicion}"
+                                           TextColor="Black"
+                                           YAlign="Center"/>
+                                    </StackLayout>
+
+                                    <ffimageloading:CachedImage Grid.Column="3"
+                                                                WidthRequest="80"
+                                                                HeightRequest="80"
+                                                                Source="{Binding _sourceEquipo}"
+                                                                DownsampleToViewSize="true"
+                                                                Margin="6"/>
+                            </Grid>
+                        </ViewCell.View>
+                    </customControls:ExtendedViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </customControls:ItemSelectedListView>
+    </StackLayout>
+
+        <Grid BackgroundColor="White"
+              IsVisible="{Binding IsBusy}">
+            <StackLayout CompressedLayout.IsHeadless="True">
+                <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"/>
+                <Label Text="Cargando Jugadores.."
+                       XAlign="Center"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

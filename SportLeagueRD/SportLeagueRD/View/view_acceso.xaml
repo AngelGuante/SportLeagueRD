@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_acceso"
+             NavigationPage.HasNavigationBar="False"
+             Title="SPORT LEAGUE RD">
+    
+    <AbsoluteLayout>
+        <!-- PRIMERA IMAGEN DE FONDO -->
+        <Image  Source="BG_acceso_2.JPG"
+                Aspect="AspectFill"
+                AbsoluteLayout.LayoutBounds=".0, 1, 1, .6"
+                AbsoluteLayout.LayoutFlags="All"/>
+        <!-- PRIMERA IMAGEN DE FONDO -->
+
+        <!-- PRIMERA IMAGEN DE FONDO -->
+        <Image  Source="BG_acceso_1.JPG"
+                Aspect="AspectFill"
+                AbsoluteLayout.LayoutBounds=".0, .0, 1, .6"
+                AbsoluteLayout.LayoutFlags="All"/>
+        <!-- PRIMERA IMAGEN DE FONDO -->
+
+        <!-- LOGO DE LA APLICACION -->
+        <Image  Source="Logo_Acceso.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".5, .2, .4, .4"
+                AbsoluteLayout.LayoutFlags="All"/>
+        <!-- LOGO DE LA APLICACION -->
+
+        <!-- FRAME QUE CONTIENE LOS BOTONES DE ACCESO -->
+        <Frame CornerRadius="10"
+               Padding="1"
+               HasShadow="True"
+               Opacity="0.8"
+               AbsoluteLayout.LayoutBounds=".5, .86, .95, .26"
+               AbsoluteLayout.LayoutFlags="All">
+
+            <AbsoluteLayout>
+                <Label Text="Acceso"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"
+                       XAlign="Center"
+                       AbsoluteLayout.LayoutBounds=".0, 0, 1,.1"
+                       AbsoluteLayout.LayoutFlags="All"/>
+
+                <Button Text="REGISTRAR"
+                        Style="{StaticResource style_buttons1}"
+                        BackgroundColor="{StaticResource verde}"
+                        AbsoluteLayout.LayoutBounds=".5, .2, .8, .24"
+                        AbsoluteLayout.LayoutFlags="All"
+                        Command="{Binding _btn_registrar}"/>
+
+                <Button Text="INGRESAR"
+                        Style="{StaticResource style_buttons1}"
+                        BackgroundColor="{StaticResource azul}"
+                        AbsoluteLayout.LayoutBounds=".5, .55, .8, .24"
+                        AbsoluteLayout.LayoutFlags="All"
+                        Command="{Binding _btn_ingresar}"/>
+
+                <Button Text="Usar sin Cuenta"
+                        TextColor="Black"
+                        FontSize="Micro"
+                        BackgroundColor="White"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        CornerRadius="30"
+                        AbsoluteLayout.LayoutBounds=".5, .9, .8, .24"
+                        AbsoluteLayout.LayoutFlags="All"
+                        Command="{Binding _btn_sinCuenta}"/>
+
+            </AbsoluteLayout>
+        </Frame>
+        <!-- FRAME QUE CONTIENE LOS BOTONES DE ACCESO -->
+
+        <!-- FOOTER -->
+        <Image  Source="icon_volleyball.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".2, 1, .1, .1"
+                AbsoluteLayout.LayoutFlags="All"/>
+
+        <Image  Source="icon_basketball.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".5, 1, .1, .1"
+                AbsoluteLayout.LayoutFlags="All"/>
+
+
+        <Image  Source="icon_baseball.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".8, 1, .1, .1"
+                AbsoluteLayout.LayoutFlags="All"/>
+        <!-- FOOTER -->
+    </AbsoluteLayout>
+
+</ContentPage>

@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             x:Class="SportLeagueRD.View.view_detalle_estadisticaJugadores"
+             BackgroundColor="{StaticResource gris}">
+
+    <Grid>
+        <StackLayout>
+            <StackLayout BackgroundColor="{StaticResource azul}">
+
+                <BoxView HeightRequest="1"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <BoxView WidthRequest="2"/>
+                    <Image Source="{Binding _sourceEquipo}"
+                           HeightRequest="40"
+                           HorizontalOptions="Start"/>
+                    <StackLayout>
+                        <Label Text="{Binding _nombreEquipo}"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+                        <Label Text="{Binding _siglas, StringFormat='(@{0:F0})'}"/>
+                    </StackLayout>
+                <Label Text="ESTADISTICAS  "
+                           YAlign="Center"
+                           TextColor="White"
+                           HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+
+            <BoxView HeightRequest="1"/>
+        </StackLayout>
+
+            <Picker SelectedItem="{Binding _itemSeleccionado}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>General</x:String>
+                        <x:String>Tiro</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!--LISTVIEW QUE MUESTRA TODOS LOS JUGADORES DE UN EQUIPO-->
+            <!--ESTADISTICAS GENERALES DEL JUGADOR-->
+            <customControls:ItemSelectedListView ItemsSource="{Binding _jugadores}"
+                                             ItemClickCommand="{Binding _elementoSeleccionado}"
+                                             HasUnevenRows="True"
+                                             SeparatorColor="{StaticResource rojo}"
+                                             BackgroundColor="White"
+                                                 IsVisible="{Binding _estadisticaAMostrar}">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                        <ViewCell.View>
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="1">
+                                <BoxView WidthRequest="4"
+                                         BackgroundColor="{StaticResource verde}"/>
+
+                                <!--DATOS GENERALES DEL JUGADOR-->
+                                <StackLayout WidthRequest="270">
+                                    <BoxView HeightRequest="1"/>
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                        <Label Text="{Binding _nombreJugador}"
+                                               TextColor="{StaticResource colorPrimario}"
+                                               FontSize="Micro"/>
+                                        <Label Text="{Binding _apellidoJugador}"
+                                               TextColor="{StaticResource colorPrimario}"
+                                               FontSize="Micro"/>
+                                    </StackLayout>
+                                    <Label Text="{Binding _posicion}"
+                                           TextColor="{StaticResource colorPrimario}"
+                                           FontSize="Micro"/>
+                                </StackLayout>
+                                <!--DATOS GENERALES DEL JUGADOR-->
+
+                                    <ScrollView Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame Margin="0"
+                                                   Padding="2"
+                                                   BackgroundColor="{StaticResource verde}">
+                                                <StackLayout>
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 Spacing="6">
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" JJ:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _JJ}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" MJ:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _MJ}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" RB:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _RB}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text="  A:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _A}"
+                                                                    FontAttributes="Italic"
+                                                                    FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                    </StackLayout>
+
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 Spacing="6">
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="0">
+                                                            <Label Text=" RO:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _RO}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text="  F:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _F}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" BL:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _BL}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" BP:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                       TextColor="Black"/>
+                                                            <Label Text="{Binding _BP}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </ScrollView>
+                                </StackLayout>
+                        </ViewCell.View>
+                    </customControls:ExtendedViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.Footer>
+                <StackLayout>
+                    <Frame Margin="6"
+                               Padding="0"
+                               BackgroundColor="{StaticResource gris}">
+                        <StackLayout>
+                            <Label Text="  GLOSARIO"
+                                       FontAttributes="Bold"
+                                       TextColor="White"
+                                       BackgroundColor="Black"/>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                        <Label Text=" JJ:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                        <Label Text="Juegos Jugados       "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                        <Label Text=" MJ:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                        <Label Text="Minutos Jugados     "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                        <Label Text=" RB:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                        <Label Text="Rebotes                     "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                        <Label Text=" A:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                        <Label Text="Asistencias                "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                        <Label Text=" RO:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                        <Label Text="Robos                        "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                        <Label Text=" F:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                        <Label Text="Faltas                          "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                        <Label Text=" BL:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                        <Label Text="Bloqueos                    "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                        <Label Text=" BP:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                        <Label Text="Balones Perdidos    "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+
+                            <BoxView HeightRequest="1"/>
+
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ListView.Footer>
+        </customControls:ItemSelectedListView>
+            <!--ESTADISTICAS GENERALES DEL JUGADOR-->
+
+            <!--ESTADISTICAS DE TIRO DEL JUGADOR-->
+            <customControls:ItemSelectedListView ItemsSource="{Binding _jugadores}"
+                                             ItemClickCommand="{Binding _elementoSeleccionado}"
+                                             HasUnevenRows="True"
+                                             SeparatorColor="{StaticResource rojo}"
+                                             BackgroundColor="White"
+                                                 IsVisible="{Binding _estadisticaAMostrar, Converter={customControls:InverseBoolConverter}}">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal"
+                                         Spacing="1">
+                                    <BoxView WidthRequest="4"
+                                         BackgroundColor="{StaticResource verde}"/>
+
+                                    <!--DATOS GENERALES DEL JUGADOR-->
+                                    <StackLayout WidthRequest="270">
+                                        <BoxView HeightRequest="1"/>
+                                        <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                            <Label Text="{Binding _nombreJugador}"
+                                               TextColor="{StaticResource colorPrimario}"
+                                               FontSize="Micro"/>
+                                            <Label Text="{Binding _apellidoJugador}"
+                                               TextColor="{StaticResource colorPrimario}"
+                                               FontSize="Micro"/>
+                                        </StackLayout>
+                                        <Label Text="{Binding _posicion}"
+                                           TextColor="{StaticResource colorPrimario}"
+                                           FontSize="Micro"/>
+                                    </StackLayout>
+                                    <!--DATOS GENERALES DEL JUGADOR-->
+
+                                    <ScrollView Orientation="Horizontal">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Frame Margin="0"
+                                                   Padding="2"
+                                                   BackgroundColor="{StaticResource verde}">
+                                                <StackLayout>
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 Spacing="6">
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" T2H:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _T2H}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" T2F:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _T2F}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" T3H:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _T3H}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" T3F:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _T3F}"
+                                                                    FontAttributes="Italic"
+                                                                    FontSize="Small"/>
+                                                        </StackLayout>
+                                                    </StackLayout>
+
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 Spacing="6">
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" TLH:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _TLH}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     Spacing="2">
+                                                            <Label Text=" TLF:"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Small"
+                                                                   TextColor="Black"/>
+                                                            <Label Text="{Binding _TLF}"
+                                                                   FontAttributes="Italic"
+                                                                   FontSize="Small"/>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </ScrollView>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </customControls:ExtendedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.Footer>
+                    <StackLayout>
+                        <Frame Margin="6"
+                               Padding="0"
+                               BackgroundColor="{StaticResource gris}">
+                            <StackLayout>
+                                <Label Text="  GLOSARIO"
+                                       FontAttributes="Bold"
+                                       TextColor="White"
+                                       BackgroundColor="Black"/>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                        <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                            <Label Text=" T2H:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                            <Label Text="Tiros Hechos de 2  "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                        <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                            <Label Text=" T2F:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                            <Label Text="Tiros Fallidos de 2 "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                        <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                            <Label Text=" T3H:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                            <Label Text="Tiros Hechos de 3  "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                        <StackLayout Orientation="Horizontal"
+                                                 Spacing="2">
+                                            <Label Text=" T3F:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                            <Label Text="Tiros Fallidos de 3 "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                        <StackLayout Orientation="Vertical"
+                                                 Spacing="2">
+                                            <Label Text=" TLH:"
+                                               HorizontalOptions="Start"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                            <Label Text=" Tiros Libres Hechos       "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Frame Padding="0"
+                                       HasShadow="False"
+                                       HorizontalOptions="CenterAndExpand"
+                                       BackgroundColor="{StaticResource gris}">
+                                        <StackLayout Orientation="Vertical"
+                                                 Spacing="2">
+                                            <Label Text=" TLF:"
+                                               FontAttributes="Bold"
+                                               FontSize="Micro"
+                                               TextColor="Black"/>
+                                            <Label Text=" Tiros Libres Fallidos     "
+                                               FontAttributes="Italic"
+                                               FontSize="Micro"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+
+                                <BoxView HeightRequest="1"/>
+
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ListView.Footer>
+            </customControls:ItemSelectedListView>
+            <!--ESTADISTICAS DE TIRO DEL JUGADOR-->
+            <!--LISTVIEW QUE MUESTRA TODOS LOS JUGADORES DE UN EQUIPO-->
+    </StackLayout>
+        
+        <Grid BackgroundColor="White"
+              IsVisible="{Binding IsBusy}">
+            <StackLayout CompressedLayout.IsHeadless="True">
+                <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"/>
+                <Label Text="Cargando Estadisticas.."
+                       XAlign="Center"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

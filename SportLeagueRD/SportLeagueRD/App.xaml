@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys; assembly=SportLeagueRD"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="SportLeagueRD.App">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <!--COLORES DE LA APP-->
+            <Color x:Key = "rojo">#FF2027</Color>
+            <Color x:Key = "verde">#57AF5C</Color>
+            <Color x:Key = "azul">#39A1BF</Color>
+            <Color x:Key = "gris">#d7d7d7</Color>
+            <Color x:Key = "colorPrimario">#1C1E34</Color>
+            <!--COLORES DE LA APP-->
+            
+            <!--ESTILOS-->
+            <Style x:Key = "style_buttons1" TargetType="Button">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="Micro"></Setter>
+                <Setter Property="CornerRadius" Value="30"></Setter>
+            </Style>
+
+            <Style x:Key = "style_entry1" TargetType="Entry">
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource rojo}"></Setter>
+            </Style>
+            <!--ESTILOS-->
+
+            <!--PLANTILLA DE LOS COMPENTARIOS-->
+            <DataTemplate x:Key="FromTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <StackLayout Spacing="0"
+                                     Orientation="Horizontal">
+                            <BoxView WidthRequest="20"
+                                     HorizontalOptions="FillAndExpand"/>
+                            <Frame Margin="2"
+                                   Padding="0"
+                                   BackgroundColor="{StaticResource azul}"
+                                   Opacity=".8"
+                                   CornerRadius="6">
+                                <StackLayout Spacing="0">
+                                    <StackLayout BackgroundColor="Black">
+                                        <Label Text="{Binding _usuario}"
+                                               TextColor="White"
+                                               FontAttributes="Italic"
+                                               FontSize="Small"
+                                               XAlign="End"
+                                               Margin="2"/>
+                                    </StackLayout>
+                                    <Label Text="{Binding _comentario}"
+                                           TextColor="Black"
+                                           FontAttributes="Bold"
+                                           FontSize="Medium"
+                                           XAlign="End"
+                                           Margin="2"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ToTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <StackLayout Spacing="0"
+                                     Orientation="Horizontal">
+                            <Frame Margin="2"
+                                   Padding="0"
+                                   BackgroundColor="{StaticResource verde}"
+                                   Opacity=".8"
+                                   CornerRadius="4">
+                                <StackLayout Spacing="0">
+                                    <StackLayout BackgroundColor="Black">
+                                        <Label Text="{Binding _usuario}"
+                                               TextColor="White"
+                                               FontAttributes="Italic"
+                                               FontSize="Small"
+                                               XAlign="Start"
+                                               Margin="2"/>
+                                    </StackLayout>
+                                    <Label Text="{Binding _comentario}"
+                                           TextColor="Black"
+                                           FontAttributes="Bold"
+                                           FontSize="Medium"
+                                           XAlign="Start"
+                                           Margin="2"/>
+                                </StackLayout>
+                            </Frame>
+                            <BoxView WidthRequest="20"
+                                     HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <customControls:CommentsDataTemplateSelector x:Key="commentsDataTemplateSelector"
+                                                         FromTemplate="{StaticResource FromTemplate}"
+                                                         ToTemplate="{StaticResource ToTemplate}"/>
+            <!--PLANTILLA DE LOS COMPENTARIOS-->
+            
+
+            <!--PLANTILLA DEL CALENDARIO DE PARTIDOS-->
+            <DataTemplate x:Key="PartidosFuturos">
+                <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource gris}">
+                    <Frame Margin="6"
+                                   Padding="0"
+                                   BackgroundColor="White">
+                        <!--EQUIPOS-->
+                        <StackLayout>
+                            <StackLayout BackgroundColor="{StaticResource azul}"
+                                                 Spacing="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <!--EQUIPO A-->
+                                    <StackLayout Orientation="Horizontal"
+                                                         HorizontalOptions="StartAndExpand"
+                                                         Spacing="2">
+                                        <ffimageloading:CachedImage Source="{Binding _sourceA}"
+                                                                        Aspect="AspectFit"
+                                                                        HeightRequest="40"
+                                                                        WidthRequest="40"
+                                                                        DownsampleToViewSize="True"
+                                                                        Margin="1"
+                                                                        HorizontalOptions="Start"/>
+                                        <StackLayout Spacing="0"
+                                                             VerticalOptions="Center">
+                                            <Label Text="{Binding _nomnbreEquipoA}"
+                                                           TextColor="White"
+                                                           Margin="1"
+                                                           FontSize="Micro"/>
+                                            <Label Text="{Binding _siglasA, StringFormat='@{0:F0}'}"
+                                                           TextColor="White"
+                                                           Margin="1"
+                                                           FontSize="Micro"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <!--EQUIPO A-->
+
+                                    <BoxView HeightRequest="1"
+                                                     HorizontalOptions="CenterAndExpand"/>
+
+                                    <!--EQUIPO B-->
+                                    <StackLayout Orientation="Horizontal"
+                                                         HorizontalOptions="EndAndExpand"
+                                                         Spacing="2">
+                                        <StackLayout Spacing="0"
+                                                             VerticalOptions="Center">
+                                            <Label Text="{Binding _nomnbreEquipoB}"
+                                                           TextColor="White"
+                                                           Margin="1"
+                                                           FontSize="Micro"/>
+                                            <Label Text="{Binding _siglasB, StringFormat='@{0:F0}'}"
+                                                           TextColor="White"
+                                                           XAlign="End"
+                                                           Margin="1"
+                                                           FontSize="Micro"/>
+                                        </StackLayout>
+                                        <ffimageloading:CachedImage Source="{Binding _sourceB}"
+                                                                        Aspect="AspectFit"
+                                                                        Margin="1"
+                                                                        HeightRequest="40"
+                                                                        WidthRequest="40"
+                                                                        DownsampleToViewSize="True"
+                                                                        HorizontalOptions="Start"/>
+                                    </StackLayout>
+                                    <!--EQUIPO B-->
+                                </StackLayout>
+
+                                <BoxView HeightRequest="1"
+                                                 BackgroundColor="Black"/>
+                            </StackLayout>
+                            <!--EQUIPOS-->
+
+                            <!--DATOS DEL PARTIDO-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding _fecha}"
+                                               TextColor="{Binding _colorFecha}"
+                                               FontAttributes="Bold"
+                                               FontSize="Small"
+                                               Margin="2"
+                                               XAlign="Start"/>
+
+                                <Label Text="{Binding _hora}"
+                                               TextColor="{StaticResource verde}"
+                                               FontAttributes="Bold"
+                                               FontSize="Small"
+                                               Margin="2"
+                                               XAlign="Start"/>
+                            </StackLayout>
+                            <!--DATOS DEL PARTIDO-->
+                        </StackLayout>
+                    </Frame>
+                </customControls:ExtendedViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="PartidosPasados">
+                <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource gris}">
+                    <Frame Margin="6"
+                               Padding="0"
+                               BackgroundColor="White">
+                        <StackLayout Spacing="0"
+                                             Margin="0">
+                            <!--SIGLAS DE LOS EQUIPOS-->
+                            <StackLayout Spacing="0"
+                                                     Orientation="Horizontal"
+                                                     BackgroundColor="Black">
+                                <Label Text="{Binding _siglasA, StringFormat='@{0:F0}'}"
+                                                   TextColor="White"
+                                                   FontSize="Small"
+                                                   Margin="2"/>
+                                <Label Text="VS"
+                                                   TextColor="White"
+                                                   FontSize="Medium"
+                                                   HorizontalOptions="CenterAndExpand"/>
+                                <Label Text="{Binding _siglasB, StringFormat='@{0:F0}'}"
+                                                   TextColor="White"
+                                                   FontSize="Small"
+                                                   Margin="2"/>
+                            </StackLayout>
+                            <!--SIGLAS DE LOS EQUIPOS-->
+
+                            <StackLayout Orientation="Horizontal"
+                                                 Spacing="0"
+                                                 Margin="0">
+                                <!--DATOS DE LOS EQUIPOS-->
+                                <!--EQUIPO A-->
+                                <StackLayout Orientation="Horizontal"
+                                                     Spacing="0"
+                                                     HorizontalOptions="FillAndExpand">
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <!--FONDO-->
+                                        <Grid HorizontalOptions="FillAndExpand"
+                                                      IsVisible="{Binding _AGaanador}">
+                                            <BoxView Color="{StaticResource azul}"
+                                                             HorizontalOptions="Center"
+                                                             WidthRequest="50"/>
+                                            <StackLayout Orientation="Horizontal"
+                                                                 Spacing="0">
+                                                <BoxView HeightRequest="10"
+                                                                 Color="{StaticResource azul}"
+                                                                 HorizontalOptions="FillAndExpand"/>
+                                                <Frame HasShadow="False"
+                                                               BackgroundColor="{StaticResource azul}"
+                                                               HeightRequest="10"
+                                                               CornerRadius="20"
+                                                               HorizontalOptions="FillAndExpand"/>
+                                            </StackLayout>
+                                        </Grid>
+                                        <!--FONDO-->
+
+                                        <!--NOMBRE, PUNTUACION Y DEMAS DEL EQUIPO A-->
+                                        <StackLayout Orientation="Horizontal"
+                                                             Spacing="0">
+                                            <BoxView WidthRequest="1"/>
+                                            <ffimageloading:CachedImage Source="{Binding _sourceA}"
+                                                                                Aspect="AspectFit"
+                                                                                HeightRequest="30"
+                                                                                WidthRequest="30"
+                                                                                DownsampleToViewSize="True"/>
+                                            <BoxView WidthRequest="1"/>
+                                            <StackLayout Spacing="0"
+                                                                 VerticalOptions="Center">
+                                                <Label Text="{Binding _nomnbreEquipoA}"
+                                                               TextColor="{Binding _colorTextoA}"
+                                                               FontSize="Small"/>
+                                                <Label Text="{Binding _puntuacionEquipoA}"
+                                                               TextColor="{Binding _colorTextoA}"
+                                                               FontSize="Small"
+                                                               XAlign="End"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <!--NOMBRE, PUNTUACION Y DEMAS DEL EQUIPO A-->
+                                    </Grid>
+                                </StackLayout>
+                                <!--EQUIPO A-->
+
+                                <!--EQUIPO B-->
+                                <StackLayout Orientation="Horizontal"
+                                                     Spacing="0"
+                                                     HorizontalOptions="FillAndExpand">
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <!--FONDO-->
+                                        <Grid HorizontalOptions="FillAndExpand"
+                                                      IsVisible="{Binding _BGaanador}">
+                                            <BoxView Color="{StaticResource azul}"
+                                                             HorizontalOptions="Center"
+                                                             WidthRequest="50"/>
+                                            <StackLayout Orientation="Horizontal"
+                                                                 Spacing="0">
+                                                <Frame HasShadow="False"
+                                                               BackgroundColor="{StaticResource azul}"
+                                                               HeightRequest="10"
+                                                               CornerRadius="20"
+                                                               HorizontalOptions="FillAndExpand"/>
+                                                <BoxView HeightRequest="10"
+                                                                 Color="{StaticResource azul}"
+                                                                 HorizontalOptions="FillAndExpand"/>
+                                            </StackLayout>
+                                        </Grid>
+                                        <!--FONDO-->
+
+                                        <!--NOMBRE, PUNTUACION Y DEMAS DEL EQUIPO B-->
+                                        <StackLayout Orientation="Horizontal"
+                                                             Spacing="0"
+                                                             HorizontalOptions="End">
+                                            <StackLayout Spacing="0"
+                                                                 VerticalOptions="Center">
+                                                <Label Text="{Binding _nomnbreEquipoB}"
+                                                               TextColor="{Binding _colorTextoB}"
+                                                               FontSize="Small"
+                                                               XAlign="End"/>
+                                                <Label Text="{Binding _puntuacionEquipoB}"
+                                                               TextColor="{Binding _colorTextoB}"
+                                                               FontSize="Small"
+                                                               XAlign="Start"/>
+                                            </StackLayout>
+
+                                            <BoxView WidthRequest="1"/>
+
+                                            <ffimageloading:CachedImage Source="{Binding _sourceB}"
+                                                                                Aspect="AspectFit"
+                                                                                HeightRequest="30"
+                                                                                WidthRequest="30"
+                                                                                DownsampleToViewSize="True"/>
+                                            <BoxView WidthRequest="1"/>
+                                        </StackLayout>
+                                        <!--NOMBRE, PUNTUACION Y DEMAS DEL EQUIPO B-->
+                                    </Grid>
+                                </StackLayout>
+                                <!--EQUIPO B-->
+                                <!--DATOS DE LOS EQUIPOS-->
+                            </StackLayout>
+
+                            <Label Text="{Binding _fecha}"
+                                           TextColor="{StaticResource verde}"
+                                           FontSize="Medium"
+                                           Margin="4"
+                                           FontAttributes="Bold"
+                                           XAlign="Center"/>
+                            <Label Text="{Binding _descripcionEstadoPartido}"
+                                           TextColor="{StaticResource rojo}"
+                                           FontSize="Small"
+                                           FontAttributes="Bold"
+                                           BackgroundColor="{StaticResource gris}"
+                                           XAlign="Center"/>
+                        </StackLayout>
+                    </Frame>
+                </customControls:ExtendedViewCell>
+            </DataTemplate>
+
+            <customControls:PartidosDataTemplateSelector x:Key="partidosDataTemplateSelector"
+                                                         PartidosFuturos="{StaticResource PartidosFuturos}"
+                                                         PartidosPasados="{StaticResource PartidosPasados}"/>
+            <!--PLANTILLA DEL CALENDARIO DE PARTIDOS-->
+
+        </ResourceDictionary>
+        
+    </Application.Resources>
+</Application>

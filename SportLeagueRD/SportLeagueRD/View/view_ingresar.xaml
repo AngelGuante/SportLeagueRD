@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_ingresar"
+             BackgroundImage="BG_acceso_1.JPG"
+             Title="Sport League RD">
+
+    <AbsoluteLayout>
+         <!--ICONO DE LA APLICACION-->
+        <Image  Source="Logo_Acceso.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".5, .0, .28, .28"
+                AbsoluteLayout.LayoutFlags="All"/><!--ICONO DE LA APLICACION-->
+
+        <Label Text="Ingresar   "
+               TextColor="White"
+               XAlign="End"
+               AbsoluteLayout.LayoutBounds="1, .3, 1, .1"
+               AbsoluteLayout.LayoutFlags="All"/>
+        
+        <!--FRAME QUE CONTIENE LA INFORMACION PARA ACCEDER-->
+        <Frame CornerRadius="10"
+               Opacity="0.7"
+               AbsoluteLayout.LayoutBounds=".5, .44, .95, .3"
+               AbsoluteLayout.LayoutFlags="All">
+            <AbsoluteLayout>
+                <Entry Placeholder="Correo"
+                       Keyboard="Email"
+                       Style="{StaticResource style_entry1}"
+                       AbsoluteLayout.LayoutBounds=".5, 0, 1, .3"
+                       AbsoluteLayout.LayoutFlags="All"/>
+
+                <Entry Placeholder="Contraseña"
+                       IsPassword="True"
+                       Style="{StaticResource style_entry1}"
+                       AbsoluteLayout.LayoutBounds=".5, .45, 1, .3"
+                       AbsoluteLayout.LayoutFlags="All"/>
+
+                <Button Text="ACCEDER"
+                        BackgroundColor="{StaticResource verde}"
+                        Style="{StaticResource style_buttons1}"
+                        AbsoluteLayout.LayoutBounds=".5, 1, 1, .3"
+                        AbsoluteLayout.LayoutFlags="All"/>
+            </AbsoluteLayout>
+        </Frame><!--FRAME QUE CONTIENE LA INFORMACION PARA ACCEDER-->
+
+        <Label Text="O"
+               TextColor="White"
+               XAlign="Center"
+               AbsoluteLayout.LayoutBounds="1, .74, 1, .16"
+               AbsoluteLayout.LayoutFlags="All"/>
+
+        <!--FRAME QUE CONTIENE LAS REDES SOCIALES CON LAS QUE SE PUEDE REGISTRAR-->
+        <Frame CornerRadius="10"
+               Opacity="0.7"
+               AbsoluteLayout.LayoutBounds=".5, .76, .95, .13"
+               AbsoluteLayout.LayoutFlags="All">
+            <AbsoluteLayout>
+                <Button Text="FACEBOOK"
+                        Style="{StaticResource style_buttons1}"
+                        BackgroundColor="#3b5998"
+                        AbsoluteLayout.LayoutBounds="0, 0, .48, 1"
+                        AbsoluteLayout.LayoutFlags="All"/>
+
+                <Button Text="GOOGLE"
+                        x:Name="googlebtn"
+                        Style="{StaticResource style_buttons1}"
+                        BackgroundColor="#d62d20"
+                        AbsoluteLayout.LayoutBounds="1, 0, .48, 1"
+                        AbsoluteLayout.LayoutFlags="All"/>
+                <!--Command="{Binding _btnGoogle}"/>-->
+            </AbsoluteLayout>
+        </Frame><!--FRAME QUE CONTIENE LAS REDES SOCIALES CON LAS QUE SE PUEDE REGISTRAR-->
+    </AbsoluteLayout>
+    
+</ContentPage>

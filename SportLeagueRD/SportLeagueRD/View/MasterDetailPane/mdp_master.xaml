@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             x:Class="SportLeagueRD.View.MasterDetailPane.mdp_master"
+             Title="Sport League RD"
+             BackgroundColor="White"
+             Opacity="0.96">
+
+    <AbsoluteLayout>
+        <!--PARTE SUPERIOR DEL MASTER QUE CONTIENE LOS DATOS DEL USUARIO-->
+        <BoxView BackgroundColor="{StaticResource colorPrimario}"
+                 AbsoluteLayout.LayoutBounds="0, 0, 1, .2"
+                 AbsoluteLayout.LayoutFlags="All"/>
+        
+        <BoxView BackgroundColor="White"
+                 Opacity="0.8"
+                 AbsoluteLayout.LayoutBounds="1, .0, 1, .11"
+                 AbsoluteLayout.LayoutFlags="All"/>
+
+        <Image Source="icon_pelotas.png"
+               Aspect="AspectFit"
+               AbsoluteLayout.LayoutBounds="0, .01, .28, .1"
+               AbsoluteLayout.LayoutFlags="All"/>
+
+        <Label Text="Usuario No Logeado"
+               FontSize="Small"
+               TextColor="Black"
+               XAlign="End"
+               AbsoluteLayout.LayoutBounds=".68, .0, .8, .1"
+               AbsoluteLayout.LayoutFlags="All"/>
+
+        <Label Text="--"
+               FontSize="Small"
+               TextColor="Black"
+               XAlign="End"
+               AbsoluteLayout.LayoutBounds=".68, .04, .8, .1"
+               AbsoluteLayout.LayoutFlags="All"/>
+
+        <Label Text="--"
+               FontSize="Small"
+               TextColor="Black"
+               XAlign="End"
+               AbsoluteLayout.LayoutBounds=".68, .08, .8, .1"
+               AbsoluteLayout.LayoutFlags="All"/>
+
+        <Button Text="Conectar"
+                FontSize="Micro"
+                BackgroundColor="{StaticResource verde}"
+                TextColor="White"
+                AbsoluteLayout.LayoutBounds=".99, .12, .46, .06"
+                AbsoluteLayout.LayoutFlags="All"/><!--PARTE SUPERIOR DEL MASTER QUE CONTIENE LOS DATOS DEL USUARIO-->
+
+        <ListView ItemsSource="{Binding _lista}"
+                  AbsoluteLayout.LayoutBounds=".3, .4, 1, .51"
+                  AbsoluteLayout.LayoutFlags="All"
+                  SeparatorColor="{StaticResource azul}"
+                  SelectedItem="{Binding SelectedItem}"
+                  RowHeight="40">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                        <ViewCell.View>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding _source}"
+                                       Aspect="AspectFit"
+                                       Margin="4"/>
+                                <Label Grid.Column="1" Grid.ColumnSpan="2"
+                                       Text="{Binding _text}"
+                                       TextColor="Black"
+                                       YAlign="Center"/>
+                            </Grid>
+                        </ViewCell.View>
+                    </customControls:ExtendedViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- FOOTER -->
+        <Image  Source="icon_volleyball.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".1, .77, .1, .08"
+                AbsoluteLayout.LayoutFlags="All"/>
+
+        <Image  Source="icon_basketball.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".5, .77, .1, .08"
+                AbsoluteLayout.LayoutFlags="All"/>
+
+
+        <Image  Source="icon_baseball.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".9, .77, .1, .08"
+                AbsoluteLayout.LayoutFlags="All"/><!-- FOOTER -->
+
+        <!-- LOGO DE LA APLICACION -->
+        <Image  Source="Logo_Acceso.png"
+                Aspect="AspectFit"
+                AbsoluteLayout.LayoutBounds=".5, 1, .3, .2"
+                AbsoluteLayout.LayoutFlags="All"/><!-- LOGO DE LA APLICACION -->
+    </AbsoluteLayout>
+    
+</ContentPage>

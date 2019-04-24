@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="SportLeagueRD.View.view_detalles_equipos"
+             BackgroundColor="{StaticResource gris}">
+
+    <Grid>
+        <StackLayout>
+            <Label Text="  Cargando.."
+                   LineBreakMode="NoWrap"
+                   BackgroundColor="White"
+                   TextColor="{StaticResource rojo}"
+                   IsVisible="{Binding IsBusy}"/>
+        <!--HEADER DE LA PAGINA DONDE SE ENCUENTRAN LOS DATOS GENERALES DEL EQUIPO-->
+        <StackLayout BackgroundColor="{StaticResource azul}">
+            <BoxView HeightRequest="2"
+                     Color="{StaticResource colorPrimario}"/>
+
+            <ffimageloading:CachedImage Source="{Binding _source}"
+                                        HeightRequest="80"
+                                        DownsampleToViewSize="True"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding _nombreEquipo}"
+                   FontAttributes="Bold"
+                   HorizontalOptions="EndAndExpand"
+                   TextColor="Black"/>
+                <Label Text="{Binding _siglas, StringFormat='(@{0:F0})'}"
+                   FontAttributes="Bold"
+                   HorizontalOptions="StartAndExpand"/>
+            </StackLayout>
+        </StackLayout><!--HEADER DE LA PAGINA DONDE SE ENCUENTRAN LOS DATOS GENERALES DEL EQUIPO-->
+
+        <!--CUERPO DE LA PAGINA DONDE SE ENCUENTRAN LOS JUGADORES Y DEMAS INFORMACION DEL EQUIPO-->
+        <StackLayout BackgroundColor="White">
+            
+            <!--LISTVIEW QUE MUESTRA TODOS LOS JUGADORES DE UN EQUIPO-->
+            <customControls:ItemSelectedListView ItemsSource="{Binding _jugadores}"
+                                                 ItemClickCommand="{Binding _elementoSeleccionado_jugadores}"
+                                                 HasUnevenRows="True"
+                                                 IsVisible="{Binding _lista_jugadores_visibilidad}">
+
+              <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+              </x:Arguments>
+              
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal">
+                                    <BoxView WidthRequest="2"/>
+                                        <Label Text="{Binding _numero, StringFormat='#{0:F0}'}"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource colorPrimario}"
+                                           HorizontalOptions="Start"/>
+                                    <Label Text="{Binding _nombreJugador}"
+                                           TextColor="{StaticResource colorPrimario}"
+                                           HorizontalOptions="Start"/>
+                                    <Label Text="{Binding _apellidoJugador}"
+                                           TextColor="{StaticResource colorPrimario}"
+                                           HorizontalOptions="Start"/>
+                                    <Label Text="{Binding _posicion}"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource colorPrimario}"
+                                           HorizontalOptions="EndAndExpand"/>
+                                    <BoxView WidthRequest="2"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </customControls:ExtendedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.Header>
+                    <StackLayout>
+                        <!--CANCHA DEL EQUIPO Y REPRESENTANTE-->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="CANCHA: "
+                                   HorizontalOptions="EndAndExpand"
+                                   TextColor="{StaticResource colorPrimario}"
+                                   FontAttributes="Bold"/>
+                            <Label Text="{Binding _localidad}"
+                                   TextColor="{StaticResource azul}"
+                                   HorizontalOptions="StartAndExpand">
+                                <Label.Effects>
+                                    <customControls:UnderlineEffect />
+                                </Label.Effects>
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding _label_localidad}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="MANAGER: "
+                                   HorizontalOptions="EndAndExpand"
+                                   TextColor="{StaticResource colorPrimario}"
+                                   FontAttributes="Bold"/>
+                            <Label Text="{Binding _representante}"
+                                   HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                        <!--CANCHA DEL EQUIPO Y REPRESENTANTE-->
+
+                        <!--BOTONES-->
+                        <StackLayout Orientation="Horizontal">
+                            <BoxView WidthRequest="2"/>
+                            <Button Text="Jugadores"
+                                    IsEnabled="{Binding _lista_ultimosPartidos_visibilidad}"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="White"
+                                    TextColor="{StaticResource verde}"
+                                    BorderColor="Black"
+                                    FontSize="Small"
+                                    BorderWidth="2"
+                                    Command="{Binding _btn_jugadores}"/>
+                            <Button Text="Ultimos 5 Partidos"
+                                    IsEnabled="{Binding _lista_jugadores_visibilidad}"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="White"
+                                    TextColor="{StaticResource verde}"
+                                    BorderColor="Black"
+                                    BorderWidth="2"
+                                    Command="{Binding _btn_ultimosJuegos}"/>
+                            <BoxView WidthRequest="2"/>
+                        </StackLayout>
+                        <!--BOTONES-->
+                            <BoxView HeightRequest="2"/>
+
+                    </StackLayout>
+                </ListView.Header>
+
+                <ListView.Footer>
+                    <StackLayout>
+                        <BoxView HeightRequest="1"/>
+
+                        <Label Text="VER ESTADISTICAS DE TODOS LOS JUGADORES"
+                               XAlign="Center"
+                               TextColor="{StaticResource azul}"
+                               IsVisible="{Binding _listaJugadoresCargados}">
+                            <Label.Effects>
+                                <customControls:UnderlineEffect />
+                            </Label.Effects>
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding _label_estadisticasJugadores}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <BoxView HeightRequest="1"/>
+                    </StackLayout>
+                </ListView.Footer>
+            </customControls:ItemSelectedListView><!--LISTVIEW QUE MUESTRA TODOS LOS JUGADORES DE UN EQUIPO-->
+
+            <!--LISTVIEW QUE MUESTRA LOS ULTIMOS PARTIDOS-->
+            <customControls:ItemSelectedListView ItemsSource="{Binding _ultimosPartidos}"
+                                                 HasUnevenRows="True"
+                                                 SeparatorColor="Black"
+                                                 ItemClickCommand="{Binding _elementoSeleccionado_partidos}"
+                                                 IsVisible="{Binding _lista_ultimosPartidos_visibilidad}">
+
+              <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+              </x:Arguments>
+
+              <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource gris}">
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <BoxView WidthRequest="6"
+                                                 Color="{Binding _coLorA}"/>
+                                        <StackLayout>
+                                            <Label Text="{Binding _nomnbreEquipoA}"
+                                                   TextColor="Black"/>
+                                            <Label Text="{Binding _puntuacionEquipoA}"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource colorPrimario}"
+                                                   XAlign="End"/>
+                                        </StackLayout>
+                                        <StackLayout HorizontalOptions="EndAndExpand">
+                                            <Label Text="{Binding _nomnbreEquipoB}"
+                                                   TextColor="Black"/>
+                                            <Label Text="{Binding _puntuacionEquipoB}"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource colorPrimario}"/>
+                                        </StackLayout>
+                                        <BoxView WidthRequest="4"/>
+                                        </StackLayout>
+                                            <Label Text="{Binding _fecha}"
+                                                   FontAttributes="Bold"
+                                                   XAlign="Center"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </customControls:ExtendedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.Header>
+                    <StackLayout>
+                        <!--CANCHA DEL EQUIPO Y REPRESENTANTE-->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="CANCHA: "
+                                   HorizontalOptions="EndAndExpand"
+                                   TextColor="{StaticResource colorPrimario}"
+                                   FontAttributes="Bold"/>
+                            <Label Text="{Binding _localidad}"
+                                   TextColor="{StaticResource azul}"
+                                   HorizontalOptions="StartAndExpand">
+                                <Label.Effects>
+                                    <customControls:UnderlineEffect />
+                                </Label.Effects>
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding _label_localidad}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="MANAGER: "
+                                   HorizontalOptions="EndAndExpand"
+                                   TextColor="{StaticResource colorPrimario}"
+                                   FontAttributes="Bold"/>
+                            <Label Text="{Binding _representante}"
+                                   HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                        <!--CANCHA DEL EQUIPO Y REPRESENTANTE-->
+
+                        <!--BOTONES-->
+                        <StackLayout Orientation="Horizontal">
+                            <BoxView WidthRequest="2"/>
+                            <Button Text="Jugadores"
+                                    IsEnabled="{Binding _lista_ultimosPartidos_visibilidad}"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="White"
+                                    TextColor="{StaticResource verde}"
+                                    BorderColor="Black"
+                                    FontSize="Small"
+                                    BorderWidth="2"
+                                    Command="{Binding _btn_jugadores}"/>
+                            <Button Text="Ultimos 5 Partidos"
+                                    IsEnabled="{Binding _lista_jugadores_visibilidad}"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="White"
+                                    TextColor="{StaticResource verde}"
+                                    BorderColor="Black"
+                                    FontSize="Small"
+                                    BorderWidth="2"
+                                    Command="{Binding _btn_ultimosJuegos}"/>
+                            <BoxView WidthRequest="2"/>
+                        </StackLayout>
+                        <!--BOTONES-->
+
+                        <BoxView HeightRequest="2"/>
+
+                    </StackLayout>
+                </ListView.Header>
+
+                <ListView.Footer>
+                    <StackLayout>
+                            <BoxView HeightRequest="1"/>
+
+                        <Frame Margin="6"
+                               Padding="0"
+                               BackgroundColor="{StaticResource gris}">
+                            <StackLayout>
+                                <Label Text="  GLOSARIO"
+                                       FontAttributes="Bold"
+                                       TextColor="White"
+                                       BackgroundColor="Black"/>
+                                <StackLayout Orientation="Horizontal">
+
+                                    <BoxView WidthRequest="4"
+                                         Color="{StaticResource verde}"
+                                         HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="Victoria"
+                                       YAlign='Center'
+                                       HorizontalOptions="CenterAndExpand"/>
+
+                                    <BoxView WidthRequest="4"
+                                         Color="{StaticResource rojo}"
+                                         HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="Derrota"
+                                       YAlign='Center'
+                                       HorizontalOptions="CenterAndExpand"/>
+
+                                    <BoxView WidthRequest="4"
+                                         Color="{StaticResource azul}"
+                                         HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="Empate"
+                                       YAlign='Center'
+                                        HorizontalOptions="CenterAndExpand"/>
+
+                                    <BoxView WidthRequest="4"
+                                         Color="Black"
+                                         HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="Suspendido"
+                                       YAlign='Center'
+                                       HorizontalOptions="CenterAndExpand"/>
+
+                                </StackLayout>
+
+                                <BoxView HeightRequest="1"/>
+
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ListView.Footer>
+            </customControls:ItemSelectedListView><!--LISTVIEW QUE MUESTRA LOS ULTIMOS PARTIDOS-->
+            
+            </StackLayout><!--CUERPO DE LA PAGINA DONDE SE ENCUENTRAN LOS JUGADORES Y DEMAS INFORMACION DEL EQUIPO-->
+        
+
+        <!--PIE DE LA PANTALLA DONDE SE ENCUENTRAN LOS VOTOS DE ESTE EQUIPO-->
+        <StackLayout CompressedLayout.IsHeadless="True"
+                     VerticalOptions="End"
+                     Orientation="Horizontal">
+            <Label Text="{Binding _votos, StringFormat=' {0:F0} VOTOS'}"
+                   FontAttributes="Bold"
+                   Margin="6"
+                   TextColor="{StaticResource verde}"
+                   FontSize="Large"
+                   YAlign="Center"
+                   HorizontalOptions="StartAndExpand"/>
+            <Button Text="VOTAR"
+                    Margin="6"
+                    Command="{Binding _btn_votar}"
+                    HorizontalOptions="EndAndExpand"
+                    BackgroundColor="{StaticResource verde}"
+                    Style="{StaticResource style_buttons1}"/>
+        </StackLayout><!--PIE DE LA PANTALLA DONDE SE ENCUENTRAN LOS VOTOS DE ESTE EQUIPO-->
+    </StackLayout>
+
+        <Frame BackgroundColor="{StaticResource gris}"
+               BorderColor="Black"
+               CornerRadius="6"
+               Padding="0"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"
+               IsVisible="{Binding _algunaListaCargada}"
+               Opacity="{Binding _OpacidadFrame}">
+            <StackLayout >
+                <Label Text="  ESTADO DEL EQUIPO  "
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       BackgroundColor="Black"/>
+                <Label Text="{Binding _EstadoEquipo}"
+                       TextColor="{Binding _colorEstadoEquipo}"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </Frame>
+
+        <Grid BackgroundColor="White"
+              IsVisible="{Binding IsBusy}">
+            <StackLayout CompressedLayout.IsHeadless="True">
+                <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"/>
+                <Label Text="Cargando Datos del Equipo.."
+                       XAlign="Center"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>

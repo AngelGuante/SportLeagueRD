@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:page_master="clr-namespace:SportLeagueRD.View.MasterDetailPane"
+                  x:Class="SportLeagueRD.View.mdp"
+                  NavigationPage.HasNavigationBar="False">
+
+    <MasterDetailPage.Master>
+        <page_master:mdp_master></page_master:mdp_master>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <ContentPage></ContentPage>
+    </MasterDetailPage.Detail>
+
+</MasterDetailPage>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view:PopupPage xmlns:view="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+                x:Class="SportLeagueRD.View.Popups.view_popup_listadoRankingJugadores">
+    
+    <StackLayout Margin="12"
+                 Padding="2"
+                 Spacing="24"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center"
+                 BackgroundColor="White">
+        <StackLayout>
+            <customControls:ItemSelectedListView ItemsSource="{Binding _lista}"
+                                                 ItemClickCommand="{Binding _elementoSeleccionado}"
+                                                 SeparatorColor="{StaticResource azul}"
+                                                 RowHeight="40">
+
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <Label Text="{Binding _nombreRank}"
+                                           TextColor="Black"
+                                           FontAttributes="Bold"
+                                           XAlign="Center"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </customControls:ExtendedViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </customControls:ItemSelectedListView>
+        </StackLayout>
+    </StackLayout>
+</view:PopupPage>

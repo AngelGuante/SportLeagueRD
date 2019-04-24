@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_detalles_eventos"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="{StaticResource gris}">
+    
+    <Frame HasShadow="True"
+           Margin="6"
+           Padding="0">
+        <Grid>
+        <ScrollView>
+            <StackLayout Spacing="0">
+                <StackLayout BackgroundColor="Black">
+                    <Label Text="{Binding _titulo}"
+                           FontSize="Medium"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           Margin="4"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="{StaticResource verde}">
+                    <Label Text="{Binding _lugar}"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           Margin="4"/>
+
+                    <StackLayout Orientation="Horizontal"
+                                 Spacing="2">
+                        <Label Text="{Binding _fecha}"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           Margin="4"/>
+
+                        <Label Text="{Binding _hora}"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           Margin="4"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <ffimageloading:CachedImage Source="{Binding _sourceEvento}"
+                                            DownsampleHeight="300"
+                                            DownsampleToViewSize="True"/>
+                <Label Text="{Binding _texto}"
+                       FontAttributes="Italic"
+                       Margin="10"/>
+
+                <WebView Source="{Binding _videoEnlace}"
+                         HeightRequest="200"/>
+            </StackLayout>
+        </ScrollView>
+
+            <Grid BackgroundColor="White"
+                  IsVisible="{Binding IsBusy}">
+                <StackLayout CompressedLayout.IsHeadless="True">
+                    <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"/>
+                    <Label Text="Cargando Detalles Evento.."
+                       XAlign="Center"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentPage>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportLeagueRD.View.view_eventos"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             xmlns:infinite="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             Title="Eventos"
+             BackgroundColor="{StaticResource gris}">
+    <Grid>
+    <StackLayout>
+        <Label Text="Eventos  "
+               TextColor="White"
+               XAlign="End"
+               LineBreakMode="NoWrap"
+               BackgroundColor="Black"/>
+
+        <customControls:ItemSelectedListView ItemClickCommand="{Binding _elementoSeleccionado}"
+                                             ItemsSource="{Binding _lista}"
+                                             HasUnevenRows="True">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+            </x:Arguments>
+
+                <ListView.Behaviors>
+                    <infinite:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}"/>
+                </ListView.Behaviors>
+
+                <ListView.ItemTemplate>
+                <DataTemplate>
+                    <customControls:ExtendedViewCell SelectedBackgroundColor="{StaticResource gris}">
+                        <Frame Margin="6"
+                               Padding="0"
+                               BackgroundColor="White">
+                                <StackLayout>
+                                    <StackLayout BackgroundColor="{StaticResource azul}">
+                                        <Label Text="{Binding _titulo}"
+                                               TextColor="White"
+                                               FontSize="Small"
+                                               XAlign="End"
+                                               Margin="4"/>
+                                    </StackLayout>
+
+                                    <Label Text="{Binding _texto}"
+                                       TextColor="Black"
+                                       FontSize="Small"
+                                       Margin="4"/>
+
+                                    <Label Text="Ver mas ->"
+                                           TextColor="{StaticResource azul}"
+                                           FontSize="Small"
+                                           HorizontalOptions="EndAndExpand"
+                                           VerticalOptions="EndAndExpand"
+                                           Margin="4">
+                                        <Label.Effects>
+                                            <customControls:UnderlineEffect />
+                                        </Label.Effects>
+                                    </Label>
+                                </StackLayout>
+                        </Frame>
+                    </customControls:ExtendedViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </customControls:ItemSelectedListView>
+    </StackLayout>
+
+        <Grid BackgroundColor="White"
+              IsVisible="{Binding IsBusy}">
+            <StackLayout CompressedLayout.IsHeadless="True">
+                <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"/>
+                <Label Text="Cargando Eventos.."
+                       XAlign="Center"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
