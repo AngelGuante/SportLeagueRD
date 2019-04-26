@@ -18,7 +18,7 @@ namespace SportLeagueRD {
 
         //  VARIABLES DE EL SERVER
         public static ServerConnection ServerC = null;
-        public static string ServerUrl = "10.0.0.9:8080/WebSocket";
+        public static string ServerUrl = "10.0.0.7:8080/WebSocket";
         public static string ServerImagesPath = "/Multimedia/Imagenes/";
 
         //  PROPIEDAD PARA CREAR/USAR LA BASE DE DATOS
