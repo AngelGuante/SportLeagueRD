@@ -14,6 +14,11 @@ namespace SportLeagueRD.Droid {
 
             base.OnCreate(savedInstanceState);
 
+            //OAuth
+            Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
+            //don't show warning message when closing account selection page
+            Xamarin.Auth.CustomTabsConfiguration.CustomTabsClosingMessage = null;
+
             //POPUP
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
