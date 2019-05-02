@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SportLeagueRD.View.view_ingresar"
+             x:Class="SportLeagueRD.View.view_loginSignup"
              BackgroundImage="BG_acceso_1.JPG"
              Title="Sport League RD">
 
@@ -14,7 +14,7 @@
                 AbsoluteLayout.LayoutFlags="All"/>
             <!--ICONO DE LA APLICACION-->
 
-            <Label Text="Ingresar   "
+            <Label Text="Acceder/Registrarse   "
                TextColor="White"
                XAlign="End"
                AbsoluteLayout.LayoutBounds="1, .3, 1, .1"
@@ -26,23 +26,19 @@
                AbsoluteLayout.LayoutBounds=".5, .44, .95, .3"
                AbsoluteLayout.LayoutFlags="All">
                 <AbsoluteLayout>
-                    <Entry Placeholder="Correo"
-                       Keyboard="Email"
-                       Style="{StaticResource style_entry1}"
-                       AbsoluteLayout.LayoutBounds=".5, 0, 1, .3"
-                       AbsoluteLayout.LayoutFlags="All"/>
+                    <Entry Text="{Binding _email}"
+                           Placeholder="Correo"
+                           Keyboard="Email"
+                           Style="{StaticResource style_entry1}"
+                           AbsoluteLayout.LayoutBounds=".5, 0, 1, .3"
+                           AbsoluteLayout.LayoutFlags="All"/>
 
-                    <Entry Placeholder="Contraseña"
-                       IsPassword="True"
-                       Style="{StaticResource style_entry1}"
-                       AbsoluteLayout.LayoutBounds=".5, .45, 1, .3"
-                       AbsoluteLayout.LayoutFlags="All"/>
-
-                    <Button Text="ACCEDER"
-                        BackgroundColor="{StaticResource verde}"
-                        Style="{StaticResource style_buttons1}"
-                        AbsoluteLayout.LayoutBounds=".5, 1, 1, .3"
-                        AbsoluteLayout.LayoutFlags="All"/>
+                    <Button Text="SIGUIENTE"
+                            BackgroundColor="{StaticResource verde}"
+                            Style="{StaticResource style_buttons1}"
+                            AbsoluteLayout.LayoutBounds=".5, 1, 1, .3"
+                            AbsoluteLayout.LayoutFlags="All"
+                            Command="{Binding _btn_siguiente}"/>
                 </AbsoluteLayout>
             </Frame>
             <!--FRAME QUE CONTIENE LA INFORMACION PARA ACCEDER-->
@@ -82,12 +78,11 @@
             <StackLayout CompressedLayout.IsHeadless="True">
                 <ActivityIndicator IsRunning="True"
                                    VerticalOptions="CenterAndExpand"/>
-                <Label Text="Cargando Noticias.."
+                <Label Text="Espere un Momento.."
                        XAlign="Center"
                        LineBreakMode="NoWrap"
                        TextColor="{StaticResource rojo}"/>
             </StackLayout>
         </Grid>
     </Grid>
-
 </ContentPage>

@@ -43,19 +43,12 @@
                        AbsoluteLayout.LayoutBounds=".0, 0, 1,.1"
                        AbsoluteLayout.LayoutFlags="All"/>
 
-                <Button Text="REGISTRAR"
+                <Button Text="ACCEDER"
                         Style="{StaticResource style_buttons1}"
                         BackgroundColor="{StaticResource verde}"
                         AbsoluteLayout.LayoutBounds=".5, .2, .8, .24"
                         AbsoluteLayout.LayoutFlags="All"
-                        Command="{Binding _btn_registrar}"/>
-
-                <Button Text="INGRESAR"
-                        Style="{StaticResource style_buttons1}"
-                        BackgroundColor="{StaticResource azul}"
-                        AbsoluteLayout.LayoutBounds=".5, .55, .8, .24"
-                        AbsoluteLayout.LayoutFlags="All"
-                        Command="{Binding _btn_ingresar}"/>
+                        Command="{Binding _btn_acceder}"/>
 
                 <Button Text="Usar sin Cuenta"
                         TextColor="Black"
