@@ -18,9 +18,7 @@ namespace SportLeagueRD.ViewModel{
         #endregion
 
         #region CONSTRUCTOR
-        public ServerConnection(){
-            ConnectToServerAsync();
-        }
+        public ServerConnection() => ConnectToServerAsync();
         #endregion
 
         #region METODOS
@@ -146,7 +144,7 @@ namespace SportLeagueRD.ViewModel{
                         } while (!result.EndOfMessage);
                     }
                 });
-            } catch (Exception e){
+            } catch (Exception e) {
                 Console.WriteLine($"-MENSAGE: (#MCTSA_002) ERROR: {e.Message}");
             }
         }

@@ -13,22 +13,22 @@ namespace SportLeagueRD.ViewModel
 
         #region CONSTRUCTOR
         public viewmodel_acceso(){
-            _btn_registrar = new Command(mc_btn_registrar);
-            _btn_ingresar = new Command(mc_btn_ingresar);
-            _btn_sinCuenta = new Command(mc_btn_sinCuentaAsync);
+            _btn_registrar = new Command(MC_btn_registrar);
+            _btn_ingresar = new Command(MC_btn_ingresar);
+            _btn_sinCuenta = new Command(MC_btn_sinCuentaAsync);
         }
         #endregion
 
         #region METODOS
 
         //ABRIR LA PAGINA DE REGISTRAR USUARIO.
-        private void mc_btn_registrar() => Application.Current.MainPage.Navigation.PushAsync(new view_registrar());
+        private void MC_btn_registrar() => Application.Current.MainPage.Navigation.PushAsync(new view_registrar());
 
         //ABRIR LA PAGINA DE LOGEAR USUARIO.
-        private void mc_btn_ingresar() => Application.Current.MainPage.Navigation.PushAsync(new view_ingresar());
+        private void MC_btn_ingresar() => Application.Current.MainPage.Navigation.PushAsync(new view_ingresar());
 
         //PASAR DIRECTAMENTE A LA PAGINA PRINCIPAL DE LA APLICACION.
-        private void mc_btn_sinCuentaAsync() => Application.Current.MainPage.Navigation.PushAsync(new mdp());
+        private void MC_btn_sinCuentaAsync() => Application.Current.MainPage.Navigation.PushAsync(new mdp());
         #endregion
     }
 }

@@ -17,13 +17,12 @@ namespace SportLeagueRD.View{
         }
 
         //PARA ELIMINAR LA PAGINA DE REGISTRAR AL INICIAR LA APP SIN USAR UNA CUENTA.
-        protected override void OnAppearing(){
+        protected override void OnAppearing() {
             base.OnAppearing();
-            if (App.page != null){
+            if (App.page != null) {
                 Application.Current.MainPage.Navigation.RemovePage(App.page);
                 App.page = null;
             }
-            
         }
     }
 }

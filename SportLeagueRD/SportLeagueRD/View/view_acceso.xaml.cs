@@ -9,6 +9,8 @@ namespace SportLeagueRD.View{
 			InitializeComponent ();
 
             BindingContext = new viewmodel_acceso();
-		}
-	}
+
+            Application.Current.MainPage = new NavigationPage(this);
+        }
+    }
 }
