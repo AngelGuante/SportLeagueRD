@@ -4,15 +4,25 @@ using SportLeagueRD.View;
 using System;
 using System.Linq;
 using Xamarin.Auth;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SportLeagueRD.Services {
     class GoogleLoginService {
-        private Account account;
-        private AccountStore store;
+        #region VARIABLES
+        private readonly string AppName = AppInfo.Name;
+
+        private readonly string Scope = "https://www.googleapis.com/auth/userinfo.email";
+        private readonly string AuthorizeUrl = "https://accounts.google.com/o/oauth2/auth";
+        private readonly string AccessTokenUrl = "https://www.googleapis.com/oauth2/v4/token";
+        private readonly string UserInfoUrl = "https://www.googleapis.com/oauth2/v2/userinfo";
+
+        private Account account = null;
+        private AccountStore store = null;
 
         private readonly string clientId = null;
-        private readonly string redirectUri = null;
+        private readonly string redirectUri = null; 
+        #endregion
 
         public GoogleLoginService() {
             switch (Device.RuntimePlatform) {
@@ -28,15 +38,15 @@ namespace SportLeagueRD.Services {
             }
             store = AccountStore.Create();
 
-            account = store.FindAccountsForService(App.AppName).FirstOrDefault();
+            account = store.FindAccountsForService(AppName).FirstOrDefault();
 
             var authenticator = new OAuth2Authenticator(
                 clientId,
                 null,
-                App.Scope,
-                new Uri(App.AuthorizeUrl),
+                Scope,
+                new Uri(AuthorizeUrl),
                 new Uri(redirectUri),
-                new Uri(App.AccessTokenUrl),
+                new Uri(AccessTokenUrl),
                 null,
                 true);
 
@@ -59,7 +69,7 @@ namespace SportLeagueRD.Services {
 			if (e.IsAuthenticated) {
 				// If the user is authenticated, request their basic user data from Google
 				// UserInfoUrl = https://www.googleapis.com/oauth2/v2/userinfo
-				var request = new OAuth2Request("GET", new Uri(App.UserInfoUrl), null, e.Account);
+				var request = new OAuth2Request("GET", new Uri(UserInfoUrl), null, e.Account);
 				var response = await request.GetResponseAsync();
 				if (response != null) {
 					// Deserialize the data and store it in the account store
@@ -69,19 +79,14 @@ namespace SportLeagueRD.Services {
 				}
 
 				if (account != null)
-					store.Delete(account, App.AppName);
+					store.Delete(account, AppName);
 
-                await store.SaveAsync(account = e.Account, App.AppName);
+                await store.SaveAsync(account = e.Account, AppName);
 
-                //--
                 LlamarVentana(user.Email);
             }
-        }
+            App.Authenticator = null;
 
-        private async void LlamarVentana(string usertEmail) {
-            await Application.Current.MainPage.Navigation.PopAsync();
-            App.page = new view_pedirDatosUsuarioRegistro(usertEmail);
-            Application.Current.MainPage = new NavigationPage(App.page);
         }
 
         private void OnAuthError(object sender, AuthenticatorErrorEventArgs e) {
@@ -91,6 +96,15 @@ namespace SportLeagueRD.Services {
             }
 
             Application.Current.MainPage.DisplayAlert("Authentication error", e.Message, "OK");
+
+            App.Authenticator = null;
 		}
+
+        //  MANDA AL USUARIO A LA VENTANA DE PEDIR DATOS RESTANTES PARA COMPLETAR EL LOGEO
+        private async void LlamarVentana(string usertEmail) {
+            await Application.Current.MainPage.Navigation.PopAsync();
+            App.page = new view_pedirDatosUsuarioRegistro(usertEmail);
+            Application.Current.MainPage = new NavigationPage(App.page);
+        }
     }
 }

@@ -27,8 +27,8 @@ namespace SportLeagueRD.ViewModel {
         #region METODOS
         // ABRE LA VENTANA DE LOGEO CON GOOGLE
         private void IngresarConGoogle() {
-            new Services.GoogleLoginService();
             IsBusy = true;
+            new Services.GoogleLoginService();
         }
         #endregion
     }

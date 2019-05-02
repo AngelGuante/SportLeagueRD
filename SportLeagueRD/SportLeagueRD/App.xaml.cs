@@ -21,18 +21,12 @@ namespace SportLeagueRD {
 
         #region SERVER CONNECTION VARIABLES
         public static ServerConnection ServerC = null;
-        public static string ServerUrl = "10.0.0.7:8080/WebSocket";
+        public static string ServerUrl = "10.0.0.8:8080/WebSocket";
         public static string ServerImagesPath = "/Multimedia/Imagenes/";
         #endregion
 
         #region GOOGLE LOGIN VARIABLES
-        public static string AppName = AppInfo.Name;
         public static OAuth2Authenticator Authenticator = null;
-
-        public static string Scope = "https://www.googleapis.com/auth/userinfo.email";
-        public static string AuthorizeUrl = "https://accounts.google.com/o/oauth2/auth";
-        public static string AccessTokenUrl = "https://www.googleapis.com/oauth2/v4/token";
-        public static string UserInfoUrl = "https://www.googleapis.com/oauth2/v2/userinfo";
 
         // OAuth
         public static string iOSClientId = "831340715062-ctso0qq9icmeepiam2gg6i7sf0q20nd9.apps.googleusercontent.com";
