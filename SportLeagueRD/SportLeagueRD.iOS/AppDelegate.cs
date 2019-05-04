@@ -22,9 +22,13 @@ namespace SportLeagueRD.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            //FFIMAGE
+
+            //  OAUTH
+            Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
+
+            //  FFIMAGE
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
-            //POPUP
+            //  POPUP
             Rg.Plugins.Popup.Popup.Init();
             Rg.Plugins.Popup.Popup.Init();
 
@@ -32,6 +36,16 @@ namespace SportLeagueRD.iOS
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options) {
+            // Convert NSUrl to Uri
+            var uri = new Uri(url.AbsoluteString);
+
+            // Load redirectUrl page
+            App.Authenticator.OnPageLoading(uri);
+
+            return true;
         }
     }
 }

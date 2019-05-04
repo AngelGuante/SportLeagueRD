@@ -2,8 +2,7 @@
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace SportLeagueRD.ViewModel
-{
+namespace SportLeagueRD.ViewModel {
     class viewmodel_acceso{
         #region ICOMMANDS
         public ICommand _btn_acceder { get; set; }
