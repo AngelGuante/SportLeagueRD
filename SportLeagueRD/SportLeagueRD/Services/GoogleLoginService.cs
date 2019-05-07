@@ -25,13 +25,13 @@ namespace SportLeagueRD.Services {
         #endregion
 
         public GoogleLoginService() {
-            switch (Device.RuntimePlatform) {
-                case Device.iOS:
+            switch (Xamarin.Forms.Device.RuntimePlatform) {
+                case Xamarin.Forms.Device.iOS:
                     clientId = App.iOSClientId;
                     redirectUri = App.iOSRedirectUrl;
                     break;
 
-                case Device.Android:
+                case Xamarin.Forms.Device.Android:
                     clientId = App.AndroidClientId;
                     redirectUri = App.AndroidRedirectUrl;
                     break;

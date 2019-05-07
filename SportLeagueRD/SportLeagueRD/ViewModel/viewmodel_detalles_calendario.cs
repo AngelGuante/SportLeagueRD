@@ -273,7 +273,7 @@ namespace SportLeagueRD.ViewModel{
         }
 
         //HACER AUTO-SCROLL HACIA ABAJO PARA MOSTRAR EL MENSAGE ENVIADO
-        private void ScrollDown(bool scroll) => Device.BeginInvokeOnMainThread(() => ListViewComponent.ScrollTo(_lista[_lista.Count() - 1], ScrollToPosition.MakeVisible, scroll));
+        private void ScrollDown(bool scroll) => Xamarin.Forms.Device.BeginInvokeOnMainThread(() => ListViewComponent.ScrollTo(_lista[_lista.Count() - 1], ScrollToPosition.MakeVisible, scroll));
 
         //  METODO QUE LLAMAN LOS BOTONES DE VOTACION
         private async void votar(string idEquipo) {
