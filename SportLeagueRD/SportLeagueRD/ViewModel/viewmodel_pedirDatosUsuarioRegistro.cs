@@ -25,7 +25,6 @@ namespace SportLeagueRD.ViewModel {
                     Nombre = _entryUserName,
                     Correo = userEmail
                 });
-
                 await Application.Current.MainPage.Navigation.PushAsync(new mdp()); 
             } else
                 DependencyService.Get<IToast>().Show($"Debe ingresar un nombre de mas de {CaracteresMinimosNombreUsuario} caracteres.");

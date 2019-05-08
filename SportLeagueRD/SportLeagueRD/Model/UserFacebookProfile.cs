@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 
 namespace SportLeagueRD.Model {
-    public class FacebookResponse {
+    public class UserFacebookProfile {
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 

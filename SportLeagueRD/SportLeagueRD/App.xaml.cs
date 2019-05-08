@@ -68,20 +68,5 @@ namespace SportLeagueRD {
         protected override void OnSleep(){}
 
         protected override void OnResume(){}
-
-        public static void LoginFacebookSuccess(FacebookResponse profile)
-        {
-            DependencyService.Get<IToast>().Show("AQUI");
-        }
-
-        public static Action LoginFacebookFail
-        {
-            get
-            {
-                DependencyService.Get<IToast>().Show("AQUI");
-                return new Action(() => Current.MainPage =
-                                  new NavigationPage(new view_splashApp()));
-            }
-        }
     }
 }

@@ -91,6 +91,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Code\DependencyService\ToastImp.cs" />
+    <Compile Include="Code\Renderers\LoginFacebookRenderer.cs" />
     <Compile Include="Code\Utilitys\UnderlineEffect.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
