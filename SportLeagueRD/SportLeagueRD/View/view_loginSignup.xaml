@@ -59,8 +59,8 @@
                         Style="{StaticResource style_buttons1}"
                         BackgroundColor="#3b5998"
                         AbsoluteLayout.LayoutBounds="0, 0, .48, 1"
-                        AbsoluteLayout.LayoutFlags="All"/>
-
+                        AbsoluteLayout.LayoutFlags="All"
+                        Command="{Binding _btnFacebook}"/>
                     <Button Text="GOOGLE"
                         x:Name="googlebtn"
                         Style="{StaticResource style_buttons1}"

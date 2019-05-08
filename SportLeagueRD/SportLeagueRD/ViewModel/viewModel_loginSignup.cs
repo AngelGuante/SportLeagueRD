@@ -1,5 +1,6 @@
 ﻿using SportLeagueRD.Utilitys;
 using SportLeagueRD.View;
+using SportLeagueRD.View.Renderer;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -10,6 +11,7 @@ namespace SportLeagueRD.ViewModel {
         #region ICOMMANDS
         public ICommand _btn_siguiente { get; set; }
         public ICommand _btnGoogle { get; set; }
+        public ICommand _btnFacebook { get; set; }
         #endregion
 
         #region PROPIEDADES
@@ -27,6 +29,7 @@ namespace SportLeagueRD.ViewModel {
         public viewModel_loginSignup() {
             _btn_siguiente = new Command(IngresarConCorreo);
             _btnGoogle = new Command(IngresarConGoogle);
+            _btnFacebook = new Command(IngresarConFacebook);
         }
         #endregion
 
@@ -35,6 +38,13 @@ namespace SportLeagueRD.ViewModel {
         private void IngresarConGoogle() {
             IsBusy = true;
             new Services.GoogleLoginService();
+        }
+        
+        // ABRE LA VENTANA DE LOGEO CON FACEBOOK
+        private async void IngresarConFacebook() {
+            await Application.Current.MainPage.Navigation.PopAsync();
+            App.page = new LoginFacebookView();
+            Application.Current.MainPage = new NavigationPage(App.page);
         }
 
          //  INGRESAR DIRECTAMENTE CON EL CORREO
