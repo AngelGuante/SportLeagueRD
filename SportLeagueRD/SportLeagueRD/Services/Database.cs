@@ -27,19 +27,19 @@ namespace SportLeagueRD.Services {
                    EquipoFavorito_nombre = "",
                    JugadorFavorito_id = "",
                    JugadorFavorito_nombre = "",
-                   JugadorFavorito_Equipo = "",
+                   JugadorFavorito_EquipoId = "",
                    BaseFavorito_id = "",
                    BaseFavorito_nombre = "",
-                   BaseFavorito_Equipo = "",
+                   BaseFavorito_EquipoId = "",
                    AleroFavorito_id = "",
                    AleroFavorito_nombre = "",
-                   AleroFavorito_Equipo = "",
+                   AleroFavorito_EquipoId = "",
                    PivotFavorito_id = "",
                    PivotFavorito_nombre = "",
-                   PivotFavorito_Equipo = "",
+                   PivotFavorito_EquipoId = "",
                    AlaPivotFavorito_id = "",
                    AlaPivotFavorito_nombre = "",
-                   AlaPivotFavorito_Equipo = ""
+                   AlaPivotFavorito_EquipoId = ""
                });
         }
 

@@ -5,10 +5,10 @@ using Xamarin.Forms.Xaml;
 namespace SportLeagueRD.View {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class view_pedirDatosUsuarioRegistro : ContentPage {
-        public view_pedirDatosUsuarioRegistro(string email) {
+        public view_pedirDatosUsuarioRegistro(string email, int fuente) {
             InitializeComponent();
 
-            BindingContext = new viewmodel_pedirDatosUsuarioRegistro(email);
+            BindingContext = new viewmodel_pedirDatosUsuarioRegistro(email, fuente);
         }
     }
 }
