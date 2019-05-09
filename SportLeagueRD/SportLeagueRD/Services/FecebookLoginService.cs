@@ -51,7 +51,7 @@ namespace SportLeagueRD.Services {
 
         private async void LoginFacebookSuccess(UserFacebookProfile profile) {
             await Application.Current.MainPage.Navigation.PopAsync();
-            App.page = new view_pedirDatosUsuarioRegistro(profile.Id);
+            App.page = new view_pedirDatosUsuarioRegistro(profile.Id, 3);
             Application.Current.MainPage = new NavigationPage(App.page);
         }
 

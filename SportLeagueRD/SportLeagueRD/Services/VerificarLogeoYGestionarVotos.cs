@@ -5,10 +5,10 @@ using Rg.Plugins.Popup.Services;
 using SportLeagueRD.View.Popups;
 using SportLeagueRD.Messages;
 
-namespace SportLeagueRD.Utilitys.tools {
+namespace SportLeagueRD.Services {
     class VerificarLogeoYGestionarVotos {
         #region VARIABLES
-        private string id = "";
+        private string id_jugador = "";
         private string nombre = "";
         private string idEquipo = "";
 
@@ -54,7 +54,7 @@ namespace SportLeagueRD.Utilitys.tools {
             usuario.EquipoFavorito_nombre = nombre;
             await App.DB.UpdateItemAsync(usuario);
             //  ACTUALIZAR LOS DATOS EN EL SERVIDOR
-            App.ServerC.SendMessageAsync($"{Comprobante1}-{usuario.ID}-{id}");
+            App.ServerC.SendMessageAsync($"{Comprobante1}-{usuario.Correo}-{id}");
         }
 
         //  HACE LA VOTACION POR UN EQUIPO EN UN PARTIDO
@@ -64,7 +64,7 @@ namespace SportLeagueRD.Utilitys.tools {
             if ((await Application.Current.MainPage.DisplayActionSheet($"Seguro? No podra cambiar su voto luego de realizarlo. ", "NO!", "SI!")).Equals("NO!"))
                 return false;
             //  ACTUALIZAR LOS DATOS EN EL SERVIDOR
-            App.ServerC.SendMessageAsync($"{Comprobante3}-{usuario.ID}-{idPartido}-{idEquipo}");
+            App.ServerC.SendMessageAsync($"{Comprobante3}-{usuario.Correo}-{idPartido}-{idEquipo}");
             return true;
         }
 
@@ -72,7 +72,7 @@ namespace SportLeagueRD.Utilitys.tools {
         public async void VotarPorJugador(string id, string nombre, string idEquipo, string posicion) {
             if (!await VerificarLogeo())
                 return;
-            this.id = id;
+            this.id_jugador = id;
             this.nombre = nombre;
             this.idEquipo = idEquipo;
             continuar = true;
@@ -81,20 +81,20 @@ namespace SportLeagueRD.Utilitys.tools {
         }
 
         //PROCESO DE VOTACION PARA UN JUGADOR
-        private async void GestionarVoto(string variable) {
+        private async void GestionarVoto(string posicion) {
                 //  ALMACENA EL ID DEL EQUIPO DEL JUGADOR FAVORITO  ANTERIOR EN LA POSICION X AL QUE PERTENECIA ESTE CUANDO SE HIZO LA ANTERIOR VOTACION
-                //  PARA PODER DISMINUIR LA VOTACION DE ESE JUGADOR EN ESE EQUIPO ESPESIFIO Y NO EN EL EQUIPO QUE PUEDA LLEGAR A ERTENECER EN UN FUTURO.
+                //  PARA PODER DISMINUIR LA VOTACION DE ESE JUGADOR EN ESE EQUIPO ESPESIFIO Y NO EN EL EQUIPO QUE PUEDA LLEGAR A PERTENECER EN UN FUTURO.
                 string idEquipoJugador = "";
                     if (continuar) {
                         continuar = false;
 
-                        switch (variable) {
+                        switch (posicion) {
                             case "0":
                                 //  SI EL USUARIO NO TIENE NINGUN JUGADOR VOTADO COMO FAVORITA, SE ASIGNA EL NUEVO EQUIPO COMO FAVORITO,
                                 //  EN CASO DE QUE SI TENA UN JUGADOR FAVORITO SELECCIONADO SE LE PREGUNTA SI ESTA SEGURO QUE DESEA CAMBIARLO.
                                 if (!string.IsNullOrEmpty(usuario.JugadorFavorito_id)) {
                                     //VERIFICO QUE EL JUGADOR SELECCIONADO NO ESTE YA GUARDADO EN ESTA MISMA VOTASION SELCCIONADA
-                                    if (id.Equals(usuario.JugadorFavorito_id) && !string.IsNullOrEmpty(usuario.JugadorFavorito_Equipo)) {
+                                    if (id_jugador.Equals(usuario.JugadorFavorito_id) && !string.IsNullOrEmpty(usuario.JugadorFavorito_EquipoId)) {
                                         await Application.Current.MainPage.DisplayAlert("Este Jugador Ya Es Tu Favorito", "Ya has seleccionado a este jugador como favorito en esta misma posicion, selecciona otro.", "OK");
                                         return;
                                     }
@@ -102,17 +102,17 @@ namespace SportLeagueRD.Utilitys.tools {
                                         return;
                                 }
                                 //  ACUALIZAR LOS DATOS EN LA BASE DE DATOS LOCAL
-                                usuario.JugadorFavorito_id = id;
+                                usuario.JugadorFavorito_id = id_jugador;
                                 usuario.JugadorFavorito_nombre = nombre;
-                                idEquipoJugador = usuario.JugadorFavorito_Equipo;
-                                usuario.JugadorFavorito_Equipo = idEquipo;
+                                idEquipoJugador = usuario.JugadorFavorito_EquipoId;
+                                usuario.JugadorFavorito_EquipoId = idEquipo;
                                 break;
                             case "1":
                                 //  SI EL USUARIO NO TIENE NINGUN JUGADOR VOTADO COMO BASE, SE ASIGNA EL NUEVO EQUIPO COMO FAVORITO,
                                 //  EN CASO DE QUE SI TENA UN JUGADOR FAVORITO BASE SELECCIONADO SE LE PREGUNTA SI ESTA SEGURO QUE DESEA CAMBIARLO.
-                                if (!string.IsNullOrEmpty(usuario.BaseFavorito_id) && !string.IsNullOrEmpty(usuario.BaseFavorito_Equipo)) {
+                                if (!string.IsNullOrEmpty(usuario.BaseFavorito_id) && !string.IsNullOrEmpty(usuario.BaseFavorito_EquipoId)) {
                                     //VERIFICO QUE EL JUGADOR SELECCIONADO NO ESTE YA GUARDADO EN ESTA MISMA VOTASION SELCCIONADA
-                                    if (id.Equals(usuario.BaseFavorito_id)) {
+                                    if (id_jugador.Equals(usuario.BaseFavorito_id)) {
                                         await Application.Current.MainPage.DisplayAlert("Este Jugador Ya Es Tu Base Favorito", "Ya has seleccionado a este jugador como favorito en esta misma posicion, selecciona otro.", "OK");
                                         return;
                                     }
@@ -120,17 +120,17 @@ namespace SportLeagueRD.Utilitys.tools {
                                         return;
                                 }
                                 //  ACUALIZAR LOS DATOS EN LA BASE DE DATOS LOCAL
-                                usuario.BaseFavorito_id = id;
+                                usuario.BaseFavorito_id = id_jugador;
                                 usuario.BaseFavorito_nombre = nombre;
-                                idEquipoJugador = usuario.BaseFavorito_Equipo;
-                                usuario.BaseFavorito_Equipo = idEquipo;
+                                idEquipoJugador = usuario.BaseFavorito_EquipoId;
+                                usuario.BaseFavorito_EquipoId = idEquipo;
                                 break;
                             case "2":
                                 //  SI EL USUARIO NO TIENE NINGUN JUGADOR VOTADO COMO BASE, SE ASIGNA EL NUEVO EQUIPO COMO FAVORITO,
                                 //  EN CASO DE QUE SI TENA UN JUGADOR FAVORITO BASE SELECCIONADO SE LE PREGUNTA SI ESTA SEGURO QUE DESEA CAMBIARLO.
-                                if (!string.IsNullOrEmpty(usuario.AleroFavorito_id) && !string.IsNullOrEmpty(usuario.AleroFavorito_Equipo)) {
+                                if (!string.IsNullOrEmpty(usuario.AleroFavorito_id) && !string.IsNullOrEmpty(usuario.AleroFavorito_EquipoId)) {
                                     //VERIFICO QUE EL JUGADOR SELECCIONADO NO ESTE YA GUARDADO EN ESTA MISMA VOTASION SELCCIONADA
-                                    if (id.Equals(usuario.AleroFavorito_id)) {
+                                    if (id_jugador.Equals(usuario.AleroFavorito_id)) {
                                         await Application.Current.MainPage.DisplayAlert("Este Jugador Ya Es Tu Alero Favorito", "Ya has seleccionado a este jugador como favorito en esta misma posicion, selecciona otro.", "OK");
                                         return;
                                     }
@@ -138,17 +138,17 @@ namespace SportLeagueRD.Utilitys.tools {
                                         return;
                                 }
                                 //  ACUALIZAR LOS DATOS EN LA BASE DE DATOS LOCAL
-                                usuario.AleroFavorito_id = id;
+                                usuario.AleroFavorito_id = id_jugador;
                                 usuario.AleroFavorito_nombre = nombre;
-                                idEquipoJugador = usuario.AleroFavorito_Equipo;
-                                usuario.AleroFavorito_Equipo = idEquipo;
+                                idEquipoJugador = usuario.AleroFavorito_EquipoId;
+                                usuario.AleroFavorito_EquipoId = idEquipo;
                                 break;
                             case "3":
                                 //  SI EL USUARIO NO TIENE NINGUN JUGADOR VOTADO COMO BASE, SE ASIGNA EL NUEVO EQUIPO COMO FAVORITO,
                                 //  EN CASO DE QUE SI TENA UN JUGADOR FAVORITO BASE SELECCIONADO SE LE PREGUNTA SI ESTA SEGURO QUE DESEA CAMBIARLO.
-                                if (!string.IsNullOrEmpty(usuario.PivotFavorito_id) && !string.IsNullOrEmpty(usuario.PivotFavorito_Equipo)) {
+                                if (!string.IsNullOrEmpty(usuario.PivotFavorito_id) && !string.IsNullOrEmpty(usuario.PivotFavorito_EquipoId)) {
                                     //VERIFICO QUE EL JUGADOR SELECCIONADO NO ESTE YA GUARDADO EN ESTA MISMA VOTASION SELCCIONADA
-                                    if (id.Equals(usuario.PivotFavorito_id)) {
+                                    if (id_jugador.Equals(usuario.PivotFavorito_id)) {
                                         await Application.Current.MainPage.DisplayAlert("Este Jugador Ya Es Tu Pivot Favorito", "Ya has seleccionado a este jugador como favorito en esta misma posicion, selecciona otro.", "OK");
                                         return;
                                     }
@@ -156,17 +156,17 @@ namespace SportLeagueRD.Utilitys.tools {
                                         return;
                                 }
                                 //  ACUALIZAR LOS DATOS EN LA BASE DE DATOS LOCAL
-                                usuario.PivotFavorito_id = id;
+                                usuario.PivotFavorito_id = id_jugador;
                                 usuario.PivotFavorito_nombre = nombre;
-                                idEquipoJugador = usuario.PivotFavorito_Equipo;
-                                usuario.PivotFavorito_Equipo = idEquipo;
+                                idEquipoJugador = usuario.PivotFavorito_EquipoId;
+                                usuario.PivotFavorito_EquipoId = idEquipo;
                                 break;
                             case "4":
                                 //  SI EL USUARIO NO TIENE NINGUN JUGADOR VOTADO COMO BASE, SE ASIGNA EL NUEVO EQUIPO COMO FAVORITO,
                                 //  EN CASO DE QUE SI TENA UN JUGADOR FAVORITO BASE SELECCIONADO SE LE PREGUNTA SI ESTA SEGURO QUE DESEA CAMBIARLO.
-                                if (!string.IsNullOrEmpty(usuario.AlaPivotFavorito_id) && !string.IsNullOrEmpty(usuario.AlaPivotFavorito_Equipo)) {
+                                if (!string.IsNullOrEmpty(usuario.AlaPivotFavorito_id) && !string.IsNullOrEmpty(usuario.AlaPivotFavorito_EquipoId)) {
                                     //VERIFICO QUE EL JUGADOR SELECCIONADO NO ESTE YA GUARDADO EN ESTA MISMA VOTASION SELCCIONADA
-                                    if (id.Equals(usuario.AlaPivotFavorito_id)) {
+                                    if (id_jugador.Equals(usuario.AlaPivotFavorito_id)) {
                                         await Application.Current.MainPage.DisplayAlert("Este Jugador Ya Es Tu Ala-Pivot Favorito", "Ya has seleccionado a este jugador como favorito en esta misma posicion, selecciona otro.", "OK");
                                         return;
                                     }
@@ -174,16 +174,16 @@ namespace SportLeagueRD.Utilitys.tools {
                                         return;
                                 }
                                 //  ACUALIZAR LOS DATOS EN LA BASE DE DATOS LOCAL
-                                usuario.AlaPivotFavorito_id = id;
+                                usuario.AlaPivotFavorito_id = id_jugador;
                                 usuario.AlaPivotFavorito_nombre = nombre;
-                                idEquipoJugador = usuario.AlaPivotFavorito_Equipo;
-                                usuario.AlaPivotFavorito_Equipo = idEquipo;
+                                idEquipoJugador = usuario.AlaPivotFavorito_EquipoId;
+                                usuario.AlaPivotFavorito_EquipoId = idEquipo;
                                 break;
                         }
                         await App.DB.UpdateItemAsync(usuario);
                         //  ACTUALIZAR LOS DATOS EN EL SERVIDOR
-                        App.ServerC.SendMessageAsync($"{Comprobante2}-{usuario.ID}-{idEquipo}-{id}-{variable}-{idEquipoJugador}");
-                        //DependencyService.Get<IToast>().Show("Voto Realizado Con Exito!!");
+                        App.ServerC.SendMessageAsync($"{Comprobante2}-{usuario.Correo}-{idEquipo}-{id_jugador}-{posicion}-{idEquipoJugador}");
+                        DependencyService.Get<IToast>().Show("Voto Realizado Con Exito!!");
                         StopMessaginCenter();
             }
         }

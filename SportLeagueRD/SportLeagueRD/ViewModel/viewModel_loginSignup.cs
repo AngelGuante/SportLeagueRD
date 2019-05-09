@@ -59,7 +59,7 @@ namespace SportLeagueRD.ViewModel {
         //  MANDA AL USUARIO A LA VENTANA DE PEDIR DATOS RESTANTES PARA COMPLETAR EL LOGEO
         private async void LlamarVentana(string usertEmail) {
             await Application.Current.MainPage.Navigation.PopAsync();
-            App.page = new view_pedirDatosUsuarioRegistro(usertEmail);
+            App.page = new view_pedirDatosUsuarioRegistro(usertEmail, 1);
             Application.Current.MainPage = new NavigationPage(App.page);
         }
         #endregion
