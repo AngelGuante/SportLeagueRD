@@ -4,6 +4,7 @@ using SportLeagueRD.Services;
 using SportLeagueRD.View;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -16,6 +17,8 @@ namespace SportLeagueRD.ViewModel{
         private bool CargandoAlgo = false;
 
         private int OpacidadFrame = 0;
+
+        private bool Sigiendo = false;
 
         private int Variacion;
 
@@ -31,6 +34,7 @@ namespace SportLeagueRD.ViewModel{
         private string Comprobante1 = "EQ03";
         private string Comprobante2 = "EQ04";
         private string Comprobante3 = "EJ01";
+        private string Comprobante4 = "SG01";
 
         //PROPIEDADES QUE SE DEBEN ACTUALIZAR LUEGO DE QUE LA PAGINA SE A CARGADO
         private string EstadoEquipo;
@@ -43,6 +47,8 @@ namespace SportLeagueRD.ViewModel{
         public ICommand _btn_jugadores { get; set; }
         public ICommand _btn_ultimosJuegos { get; set; }
         public ICommand _btn_votar { get; set; }
+        public ICommand _btn_seguir { get; set; }
+        public ICommand _btn_dejarDeSeguir { get; set; }
         public ICommand _label_localidad { get; set; }
         public ICommand _label_estadisticasJugadores { get; set; }
         public ICommand _elementoSeleccionado_jugadores { get { return new Command((item) => { MC_label_estatisticaJugadores(new ObservableCollection<model_jugadores> { item as model_jugadores }); }); }
@@ -102,6 +108,14 @@ namespace SportLeagueRD.ViewModel{
             set{
                 _busy = value;
                 _OpacidadFrame = 1;
+                OnPropertyChanged();
+            }
+        }
+
+        //  MUESTRA Y OCULTA LOS BOTONES DE SEGUIR O DEJAR DE SEGUIR EQUIPO, SEGUN SEA EL CASO
+        public bool _siguiendo { get => Sigiendo;
+            set {
+                Sigiendo = value;
                 OnPropertyChanged();
             }
         }
@@ -219,9 +233,13 @@ namespace SportLeagueRD.ViewModel{
                 App.ServerC.SendMessageAsync($"EM01-{_id}");
             });
             _btn_votar = new Command(MC_btn_realizarVoto);
+            _btn_seguir = new Command(MC_seguirEquipo);
+            _btn_dejarDeSeguir = new Command(MC_dejarSeguirEquipo);
             _label_localidad = new Command(MC_label_localidad);
             _label_estadisticasJugadores = new Command(Parametro_estadisticasJugador);
             #endregion
+
+            EquipoSeguido();
 
             StarMessaginCenter(0);
             Comprobante = variacion == 0 ? Comprobante1 : Comprobante2;
@@ -230,7 +248,40 @@ namespace SportLeagueRD.ViewModel{
         #endregion
 
         #region METODOS
-    
+        //  AGREGA EL EQUIPO A LA LISTA DE EQUIPOS A SEGUIR POR EL USUARIO
+        private async void MC_seguirEquipo() {
+            if (await new VerificarLogeoYGestionarVotos().VerificarLogeo()) {
+                Entity_usuario usuario = App.usuario;
+                usuario.EquiposSeguidosID += $",{_id}";
+                await App.DB.UpdateItemAsync(usuario);
+                _siguiendo = true;
+                //  MANDAR LOS DATOS AL SERVIDOR
+                App.ServerC.SendMessageAsync($"{Comprobante4}-{usuario.Correo}-{usuario.EquiposSeguidosID}");
+            }
+        }
+
+        //  ELIMINA EL EQUIPO DE LA LISTA DE EQUIPOS A SEGUIR POR EL USUARIO
+        private async void MC_dejarSeguirEquipo() {
+            Entity_usuario usuario = App.usuario;
+            string[] idEquipos = usuario.EquiposSeguidosID.Split(',');
+
+            IEnumerable<string> nuevaLista = usuario.EquiposSeguidosID
+                .Split(',')
+                .Where(e => e != _id);
+
+            usuario.EquiposSeguidosID = string.Join(",", nuevaLista);
+            await App.DB.UpdateItemAsync(usuario);
+            _siguiendo = false;
+            //  MANDAR LOS DATOS AL SERVIDOR
+            App.ServerC.SendMessageAsync($"{Comprobante4}-{usuario.Correo}-{usuario.EquiposSeguidosID}");
+        }
+
+        //  VERIFICA SI EL USUARIO ESTA SIGUIENDO ESTE EQUIPO, EN CASO DE SER ASI O NO MUESRTA LOS EL BOTON DE SEGUIR O DEJAR DE SEGUIR.
+        private void EquipoSeguido() {
+            if ((App.usuario.EquiposSeguidosID.Split(',')).Where(e => e.Equals(_id)).FirstOrDefault() != null)
+                _siguiendo = true;
+        }
+
         //EVENTO DEL BOTON HACE VISIBLE Y LLENA LA LISTA DE LOS JUGADORES Y HACE INVISIBLE LOS DEMAS LISTAS.
         private async void MC_btn_jugadores(List<model_jugadores> jugadores){
             _cargandoAlgo = true;

@@ -17,11 +17,9 @@
         <StackLayout BackgroundColor="{StaticResource azul}">
             <BoxView HeightRequest="2"
                      Color="{StaticResource colorPrimario}"/>
-
             <ffimageloading:CachedImage Source="{Binding _source}"
                                         HeightRequest="80"
                                         DownsampleToViewSize="True"/>
-
             <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding _nombreEquipo}"
                    FontAttributes="Bold"
@@ -326,13 +324,31 @@
                    FontSize="Large"
                    YAlign="Center"
                    HorizontalOptions="StartAndExpand"/>
-            <Button Text="VOTAR"
-                    Margin="6"
-                    Command="{Binding _btn_votar}"
-                    HorizontalOptions="EndAndExpand"
-                    BackgroundColor="{StaticResource verde}"
-                    Style="{StaticResource style_buttons1}"/>
-        </StackLayout><!--PIE DE LA PANTALLA DONDE SE ENCUENTRAN LOS VOTOS DE ESTE EQUIPO-->
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="EndAndExpand"
+                             Spacing="1">
+                    <Button Text="VOTAR"
+                            Margin="6"
+                            Command="{Binding _btn_votar}"
+                            HorizontalOptions="End"
+                            BackgroundColor="{StaticResource verde}"
+                            Style="{StaticResource style_buttons1}"/>
+                    <Button Text="SEGUIR"
+                            Margin="6"
+                            Command="{Binding _btn_seguir}"
+                            HorizontalOptions="End"
+                            BackgroundColor="{StaticResource azul}"
+                            Style="{StaticResource style_buttons1}"
+                            IsVisible="{Binding _siguiendo, Converter={customControls:InverseBoolConverter}}"/>
+                    <Button Text="DEJAR DE SEGUIR"
+                            Margin="6"
+                            Command="{Binding _btn_dejarDeSeguir}"
+                            HorizontalOptions="End"
+                            BackgroundColor="{StaticResource rojo}"
+                            Style="{StaticResource style_buttons1}"
+                            IsVisible="{Binding _siguiendo}"/>
+                </StackLayout>
+            </StackLayout><!--PIE DE LA PANTALLA DONDE SE ENCUENTRAN LOS VOTOS DE ESTE EQUIPO-->
     </StackLayout>
 
         <Frame BackgroundColor="{StaticResource gris}"
@@ -343,7 +359,7 @@
                VerticalOptions="CenterAndExpand"
                IsVisible="{Binding _algunaListaCargada}"
                Opacity="{Binding _OpacidadFrame}">
-            <StackLayout >
+            <StackLayout>
                 <Label Text="  ESTADO DEL EQUIPO  "
                        FontAttributes="Bold"
                        TextColor="White"

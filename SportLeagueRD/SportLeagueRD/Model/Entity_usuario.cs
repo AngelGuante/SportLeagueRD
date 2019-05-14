@@ -7,6 +7,7 @@ namespace SportLeagueRD.Model {
         public string Nombre { get; set; }
         [NotNull]
         public string Correo { get; set; }
+        public string EquiposSeguidosID { get; set; }
         public string EquipoFavorito_id { get; set; }
         public string EquipoFavorito_nombre { get; set; }
         public string JugadorFavorito_id { get; set; }
