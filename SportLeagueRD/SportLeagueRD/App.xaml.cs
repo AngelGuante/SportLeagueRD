@@ -20,7 +20,7 @@ namespace SportLeagueRD {
 
         #region SERVER CONNECTION VARIABLES
         public static ServerConnection ServerC = null;
-        public static string ServerUrl = "10.0.0.7:8080/WebSocket";
+        public static string ServerUrl = "10.0.0.8:8080/WebSocket";
         public static string ServerImagesPath = "/Multimedia/Imagenes/";
         #endregion
 

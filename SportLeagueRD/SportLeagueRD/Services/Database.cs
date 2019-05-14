@@ -23,6 +23,7 @@ namespace SportLeagueRD.Services {
                    ID = 1,
                    Nombre = "No Logeado",
                    Correo = "",
+                   EquiposSeguidosID = "",
                    EquipoFavorito_id = "",
                    EquipoFavorito_nombre = "",
                    JugadorFavorito_id = "",
@@ -44,7 +45,10 @@ namespace SportLeagueRD.Services {
         }
 
         //  GUARDA LOS DATOS DEL USUARIO
-        public Task<int> UpdateItemAsync(Entity_usuario item) => database.UpdateAsync(item);
+        public Task<int> UpdateItemAsync(Entity_usuario item) {
+            App.usuario = item;
+            return database.UpdateAsync(item);
+        }
 
         // TRAE LOS DATOS DEL USUARIO REGISTRADO
         public Task<Entity_usuario> GetItemAsync() => database.Table<Entity_usuario>().Where(i => i.ID == 1).FirstOrDefaultAsync();

@@ -8,6 +8,7 @@ namespace SportLeagueRD.ViewModel {
         #region VARIABLES
         private string userEmail = "";
         private readonly string Comprobante = "US01";
+        private int fuente = 0;
         #endregion
 
         public string _entryUserName { get; set; } = "";
@@ -21,22 +22,24 @@ namespace SportLeagueRD.ViewModel {
         //  2 - GOOGLE
         //  3 - FACEBOOK
         public viewmodel_pedirDatosUsuarioRegistro(string userEmail, int fuente) {
+            this.fuente = fuente;
             this.userEmail = userEmail;
-            _btnSiguiente = new Command(Prueba);
+            _btnSiguiente = new Command(RegistrarUsuarioNuevo);
         }
 
         //SI EL USUARIO A INGRESADO UN NOMBRE CON MAS DE 2 CARACTERES, ESTE GUARDARA SUS DATOS.
-        private async void Prueba() {
+        private async void RegistrarUsuarioNuevo() {
             int CaracteresMinimosNombreUsuario = 2;
             if (_entryUserName.Length > CaracteresMinimosNombreUsuario) {
                 //  GUARDARLO EN LA BASE DE DATOS
                 await App.DB.UpdateItemAsync(new Entity_usuario {
                     ID = 1,
                     Nombre = _entryUserName,
-                    Correo = userEmail
+                    Correo = userEmail,
+                    EquiposSeguidosID = ""
                 });
                 //  GUARDARLO EN EL SERVIDOR
-                App.ServerC.SendMessageAsync($"{Comprobante}-{userEmail}-{_entryUserName}");
+                App.ServerC.SendMessageAsync($"{Comprobante}-{userEmail}-{_entryUserName}-{fuente}");
                 //  Mandar al usuario al servidor
                 await Application.Current.MainPage.Navigation.PushAsync(new mdp()); 
             } else
