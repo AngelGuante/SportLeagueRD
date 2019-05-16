@@ -1,0 +1,115 @@
+[33mcommit 66dad60ce36c2c9a8db1e326bbcb4c11097be562[m[33m ([m[1;36mHEAD -> [m[1;32missue#11_followTeamInLogIn[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: e093625 3b70933
+Author: Miguel Angel Guante Suero <49294128+AngelGuante@users.noreply.github.com>
+Date:   Tue May 14 15:17:43 2019 -0400
+
+    Merge pull request #17 from AngelGuante/issuse#12-fallowTeam
+    
+    User can follow/unfollow a team.
+    Solved issuse #12
+
+[33mcommit 3b70933515884f32e3b5de8cf52cffbf5bbff4d8[m[33m ([m[1;31morigin/issuse#12-fallowTeam[m[33m)[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Tue May 14 15:09:41 2019 -0400
+
+    Solved issuse #12
+    
+    closes #12
+
+[33mcommit e09362519b33fbc4dd995567c948fe37758be3ab[m
+Merge: 1928a7a 36dd3ab
+Author: Miguel Angel Guante Suero <49294128+AngelGuante@users.noreply.github.com>
+Date:   Thu May 9 13:17:01 2019 -0400
+
+    Merge pull request #14 from AngelGuante/issuse#6-SaveUserServer
+    
+    Sending user data to the server when login
+
+[33mcommit 36dd3ab5ffb3e614a8e2ece253a03de92203fb5a[m[33m ([m[1;31morigin/issuse#6-SaveUserServer[m[33m)[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Thu May 9 13:12:15 2019 -0400
+
+    Sending user data to the server when login
+    
+    Closes #6.
+
+[33mcommit 1928a7a64a82dda4c87046c3d5b418c1931e3800[m
+Merge: 1cfe14d 033fa5e
+Author: Miguel Angel Guante Suero <49294128+AngelGuante@users.noreply.github.com>
+Date:   Wed May 8 12:49:07 2019 -0400
+
+    Merge pull request #9 from AngelGuante/LoginFacebook
+    
+    Login facebook
+
+[33mcommit 033fa5eaa633145e0f1a0e0a0862efa9cfe18a30[m[33m ([m[1;31morigin/LoginFacebook[m[33m)[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Wed May 8 12:47:12 2019 -0400
+
+    Login With FB finished and optimized in Android and iOS
+
+[33mcommit 1848577e5d54ac9dc9eb938ef8b531ec02998e9f[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Wed May 8 10:35:55 2019 -0400
+
+    Finished Facebook Loggin Source, perform source..
+
+[33mcommit b9941452cde4fe8d8356f549ee45433493e91730[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Tue May 7 13:17:00 2019 -0400
+
+    statrting Facebook Login Code
+
+[33mcommit 1cfe14d47e12e8ab71c563e38d467c046d8490a5[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Sat May 4 12:09:54 2019 -0400
+
+    Finished GoogleLogin IOS part
+
+[33mcommit 9e8475030be1c83d75c9d64eb28b33085c5f85c5[m
+Merge: 37d9a19 129d1e8
+Author: Miguel Angel Guante Suero <49294128+AngelGuante@users.noreply.github.com>
+Date:   Thu May 2 11:49:49 2019 -0400
+
+    Merge pull request #8 from AngelGuante/Add-LoginDefault-Funtionality
+    
+    Branch finished
+
+[33mcommit 129d1e8f9f39239da64ff73de365111d202311af[m[33m ([m[1;31morigin/Add-LoginDefault-Funtionality[m[33m)[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Thu May 2 11:46:19 2019 -0400
+
+    Branch finished
+
+[33mcommit 37d9a1963c9eb471ac4c044ba1451e65c715a243[m
+Merge: 20556da 200505c
+Author: Miguel Angel Guante Suero <49294128+AngelGuante@users.noreply.github.com>
+Date:   Wed May 1 20:38:15 2019 -0400
+
+    Merge pull request #5 from AngelGuante/LoginGoogle
+    
+    Login google
+
+[33mcommit 200505ca475153953ce927302297b0e79096796e[m[33m ([m[1;31morigin/LoginGoogle[m[33m)[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Wed May 1 20:33:00 2019 -0400
+
+    Login with Google, finished
+
+[33mcommit 1b3c0b847b7f9b8eca102a125d94c8bfe391e52c[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Tue Apr 30 13:10:02 2019 -0400
+
+    LoginGoogle finished, but need funtionality
+
+[33mcommit 0e021177cb9781e6bcb946a2c0009a8489826053[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Fri Apr 26 13:21:30 2019 -0400
+
+    Needed Packages Installed
+
+[33mcommit 20556da56516ac67f79f42862ccf0f4d0318a031[m
+Author: AngelGuante <miguel_guante@outlook.com>
+Date:   Wed Apr 24 17:24:43 2019 -0400
+
+    first commit

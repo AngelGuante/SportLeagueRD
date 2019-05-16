@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 
 namespace SportLeagueRD.Model{
-    public class model_equipos{
+    public class model_equipos : Base_model{
         #region VARIABLES
         private ImageSource Source;
         #endregion
@@ -27,5 +27,16 @@ namespace SportLeagueRD.Model{
         //  1 - SUSPENDIDO
         //  2 - RETIRADO
         public string _estado { set; get; }
+
+
+
+        private bool siguiendo = false;
+        public bool _switcherValue { get => siguiendo;
+            set {
+                siguiendo = value;
+                DependencyService.Get<IToast>().Show("Pressed " + value);
+                OnPropertyChanged();
+            }
+        }
     }
 }

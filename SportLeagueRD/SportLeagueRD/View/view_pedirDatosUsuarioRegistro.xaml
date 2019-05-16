@@ -1,14 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
              x:Class="SportLeagueRD.View.view_pedirDatosUsuarioRegistro">
     <ContentPage.Content>
         <StackLayout>
-            <Entry Text="{Binding _entryUserName}"
+            <StackLayout IsVisible="{Binding _uno}">
+                <Entry Text="{Binding _entryUserName}"
                    Placeholder="Nombre de Usuario"/>
-            
-            <Button Text="Siguiente"
-                    Command="{Binding _btnSiguiente}"/>
+
+                <Button Text="Continuar"
+                    Command="{Binding _continuar}"/>
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding _uno, Converter={customControls:InverseBoolConverter}}">
+                <Label Text="Seleccione los equipos que desea seguir"/>
+                <ListView ItemsSource="{Binding _equipos}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout>
+                                            <Label Text="{Binding _id}"/>
+                                            <Label Text="{Binding _nombreEquipo}"/>
+                                            <Label Text="{Binding _siglas}"/>
+                                        </StackLayout>
+                                        <Switch HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="CenterAndExpand"
+                                                IsToggled="{Binding _switcherValue}"/>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                    <ListView.Footer>
+                        <Button Text="Siguiente"
+                                Command="{Binding _btnSiguiente}"/>
+                    </ListView.Footer>
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
