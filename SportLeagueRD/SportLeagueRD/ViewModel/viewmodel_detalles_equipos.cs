@@ -323,7 +323,10 @@ namespace SportLeagueRD.ViewModel{
         }
 
         //  EVENTO PARA EL BOTON DE VOTAR, VERIFICA QUE EL USUARIO ESTE LOGEADO, SI NO LO ESTA, LO MANDA A LOGEARSE EN CASO CONTRARIO REALIZA EL VOTO
-        private void MC_btn_realizarVoto() => new VerificarLogeoYGestionarVotos().VotarPorEquipo(_id, _nombreEquipo);
+        private async void MC_btn_realizarVoto() {
+            if (await new VerificarLogeoYGestionarVotos().VotarPorEquipo(_id, _nombreEquipo))
+                _votos = (int.Parse(_votos) + 1).ToString();
+        }
 
         //ABRE LA VENTANA DEL MARCADOR DE LOS EQUIPOS QUE SE A SELECCIONADO
         private void MC_AbrirVentanaMarcadorSeleccionado(model_marcador item) => Application.Current.MainPage.Navigation.PushAsync(new view_detalles_marcador(new model_marcador {
