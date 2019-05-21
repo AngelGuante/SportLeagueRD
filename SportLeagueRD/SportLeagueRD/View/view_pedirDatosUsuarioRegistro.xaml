@@ -1,14 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SportLeagueRD.View.view_pedirDatosUsuarioRegistro">
+             xmlns:customControls="clr-namespace:SportLeagueRD.Utilitys"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="SportLeagueRD.View.view_pedirDatosUsuarioRegistro"
+             BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout>
-            <Entry Text="{Binding _entryUserName}"
+        <Grid>
+            <StackLayout>
+                <StackLayout IsVisible="{Binding _MostrarEquiposASeguir}">
+                    <Entry Text="{Binding _entryUserName}"
                    Placeholder="Nombre de Usuario"/>
-            
-            <Button Text="Siguiente"
-                    Command="{Binding _btnSiguiente}"/>
-        </StackLayout>
+                    <Button Text="Continuar"
+                    Command="{Binding _continuar}"/>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding _MostrarEquiposASeguir, Converter={customControls:InverseBoolConverter}}"
+                             VerticalOptions="FillAndExpand">
+                    <Label Text="Seleccione los equipos que desea seguir"
+                           XAlign="Center"
+                           FontSize="Medium"
+                           TextColor="{StaticResource rojo}"/>
+                    <ListView ItemsSource="{Binding _equipos}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <customControls:ExtendedViewCell SelectedBackgroundColor="White">
+                                    <ViewCell.View>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <ffimageloading:CachedImage Source="{Binding _source}"
+                                                                        HeightRequest="100"
+                                                                        DownsampleToViewSize="true"/>
+                                            <StackLayout Grid.Column="1" Grid.ColumnSpan="2"
+                                                         Orientation="Vertical">
+                                                <Label Text="{Binding _nombreEquipo}"
+                                                       TextColor="Black"/>
+                                                <Label Text="{Binding _siglas, StringFormat='@{0:F0}'}"
+                                                       TextColor="Black"/>
+                                            </StackLayout>
+                                            <Switch Grid.Column="3"
+                                                    IsToggled="{Binding _switcherValue}"/>
+                                        </Grid>
+                                    </ViewCell.View>
+                                </customControls:ExtendedViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Button Text="Siguiente"
+                            VerticalOptions="End"
+                            Command="{Binding _btnSiguiente}"/>
+                </StackLayout>
+            </StackLayout>
+
+            <Grid BackgroundColor="White"
+              IsVisible="{Binding IsBusy}">
+                <StackLayout CompressedLayout.IsHeadless="True">
+                    <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"/>
+                    <Label Text="Espere un momento.."
+                       XAlign="Center"
+                       LineBreakMode="NoWrap"
+                       TextColor="{StaticResource rojo}"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

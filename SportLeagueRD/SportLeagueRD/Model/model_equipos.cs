@@ -1,9 +1,11 @@
 ﻿using Xamarin.Forms;
 
 namespace SportLeagueRD.Model{
-    public class model_equipos{
+    public class model_equipos : Base_model{
         #region VARIABLES
         private ImageSource Source;
+        private bool siguiendo = false;
+
         #endregion
 
         //DATOS DE EL EQUIPO
@@ -27,5 +29,13 @@ namespace SportLeagueRD.Model{
         //  1 - SUSPENDIDO
         //  2 - RETIRADO
         public string _estado { set; get; }
+
+        //  ESTA PROPIEDAD ES PARA PODER SELECCIONAR LOS EQUIPOS QUE SEGUIRA EL USUARIO AL MOMENTO DE REGISTRARSE EN LA APLICACION
+        public bool _switcherValue { get => siguiendo;
+            set {
+                siguiendo = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }
