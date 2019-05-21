@@ -35,19 +35,19 @@ namespace SportLeagueRD.Services {
         }
 
         //  HACE LA VOTACION POR UN EQUIPO
-        public async void VotarPorEquipo(string id, string nombre) {
+        public async Task<bool> VotarPorEquipo(string id, string nombre) {
             if (!await VerificarLogeo())
-                return;
+                return false;
             //  SI EL USUARIO NO TIENE NINGUN EQUIPO VOTADO COMO FAVORITA, SE ASIGNA EL NUEVO EQUIPO COMO FAVORITO,
             //  EN CASO DE QUE SI TENA UIN EQUIPO SELECCIONADO SE LE PREGUNTA SI ESTA SEGURO QUE DESEA CAMBIARLO.
             if (!string.IsNullOrEmpty(usuario.EquipoFavorito_id)) {
                 //VERIFICO QUE EL EQUIPO SELECCIONADO NO ESTE YA GUARDADO
                 if (id.Equals(usuario.EquipoFavorito_id)){
                     await Application.Current.MainPage.DisplayAlert("Este Equipo Ya Es Tu Favorito", "Ya has seleccionado a este Equipo como favorito, Selecciona otro.", "OK");
-                    return;
+                    return false;
                 }
                 if ((await Application.Current.MainPage.DisplayActionSheet($"Cambiar {usuario.EquipoFavorito_nombre.ToUpper()}", "NO!", "SI!")).Equals("NO!"))
-                    return;
+                    return false;
                 }
             //  ACUALIZAR LOS DATOS EN LA BASE DE DATOS LOCAL
             usuario.EquipoFavorito_id = id;
@@ -55,6 +55,7 @@ namespace SportLeagueRD.Services {
             await App.DB.UpdateItemAsync(usuario);
             //  ACTUALIZAR LOS DATOS EN EL SERVIDOR
             App.ServerC.SendMessageAsync($"{Comprobante1}-{usuario.Correo}-{id}");
+            return true;
         }
 
         //  HACE LA VOTACION POR UN EQUIPO EN UN PARTIDO
