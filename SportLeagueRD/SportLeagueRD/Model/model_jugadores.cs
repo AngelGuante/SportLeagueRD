@@ -73,7 +73,7 @@ namespace SportLeagueRD.Model{
                 case "4":
                     return "Ala-Pivot";
                 default:
-                    return "--POSICION NO GESTIONADA--";
+                    return posicion;
             }
         }
         #endregion
