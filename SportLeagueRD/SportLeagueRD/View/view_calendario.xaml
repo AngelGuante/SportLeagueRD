@@ -8,7 +8,6 @@
     <Grid>
         <StackLayout CompressedLayout.IsHeadless="True"
                      Spacing="0">
-
             <!--BARRA DE FECHA-->
             <Frame Margin="4"
                    Padding="0"
@@ -21,7 +20,6 @@
                         Command="{Binding _btn_fechaAnterior}"
                         CommandParameter="-1"
                         Image="leftarrow"/>
-
                 <DatePicker x:Name="picker"
                             Date="{Binding _fechaBuscador}"
                             Format="ddd dd/MM/yyyy"
@@ -31,7 +29,6 @@
                             FontSize="Small"
                             HorizontalOptions="CenterAndExpand"
                             VerticalOptions="FillAndExpand"/>
-
                 <Button BackgroundColor="White"
                         HeightRequest="50"
                         Command="{Binding _btn_fechaAnterior}"
@@ -77,5 +74,4 @@
             </StackLayout>
         </Grid>
     </Grid>
-        
 </ContentPage>

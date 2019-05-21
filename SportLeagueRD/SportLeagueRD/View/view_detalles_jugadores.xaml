@@ -29,18 +29,15 @@
                         <Label Text="{Binding _nombreCompleto}"
                                FontAttributes="Bold"
                                TextColor="Black"/>
-
                         <ScrollView>
                             <StackLayout>
                                 <Label Text="{Binding _fechaNacimientoEdad}"
                                        FontAttributes="Bold"/>
-
                                 <Label Text="{Binding _nomreEquipoYSigla}"
                                        TextColor="{StaticResource azul}">
                                     <Label.Effects>
                                         <customControls:UnderlineEffect />
                                     </Label.Effects>
-
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding _label_equipo}"/>
                                     </Label.GestureRecognizers>
@@ -48,7 +45,6 @@
 
                                 <Label Text="{Binding _fechaIngreso, StringFormat='Ingreso: {0:F0}'}"
                                        FontAttributes="Bold"/>
-
                                 <Label Text="{Binding _posicion, StringFormat='Posicion: {0:F0}'}"
                                        FontAttributes="Bold"/>
                             </StackLayout>

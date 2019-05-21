@@ -253,6 +253,7 @@ namespace SportLeagueRD.ViewModel{
             if (await new VerificarLogeoYGestionarVotos().VerificarLogeo()) {
                 Entity_usuario usuario = App.usuario;
                 usuario.EquiposSeguidosID += $",{_id}";
+                //  ACTUALIZAR LOS DATOS EN LA BASE DE DATOS
                 await App.DB.UpdateItemAsync(usuario);
                 _siguiendo = true;
                 //  MANDAR LOS DATOS AL SERVIDOR
@@ -270,6 +271,7 @@ namespace SportLeagueRD.ViewModel{
                 .Where(e => e != _id);
 
             usuario.EquiposSeguidosID = string.Join(",", nuevaLista);
+            //  ACTUALIZAR LOS DATOS EN LA BASE DE DATOS
             await App.DB.UpdateItemAsync(usuario);
             _siguiendo = false;
             //  MANDAR LOS DATOS AL SERVIDOR

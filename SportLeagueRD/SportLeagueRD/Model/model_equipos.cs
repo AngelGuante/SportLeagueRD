@@ -4,6 +4,8 @@ namespace SportLeagueRD.Model{
     public class model_equipos : Base_model{
         #region VARIABLES
         private ImageSource Source;
+        private bool siguiendo = false;
+
         #endregion
 
         //DATOS DE EL EQUIPO
@@ -28,13 +30,10 @@ namespace SportLeagueRD.Model{
         //  2 - RETIRADO
         public string _estado { set; get; }
 
-
-
-        private bool siguiendo = false;
+        //  ESTA PROPIEDAD ES PARA PODER SELECCIONAR LOS EQUIPOS QUE SEGUIRA EL USUARIO AL MOMENTO DE REGISTRARSE EN LA APLICACION
         public bool _switcherValue { get => siguiendo;
             set {
                 siguiendo = value;
-                DependencyService.Get<IToast>().Show("Pressed " + value);
                 OnPropertyChanged();
             }
         }
