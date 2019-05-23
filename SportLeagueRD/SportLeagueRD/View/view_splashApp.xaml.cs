@@ -5,10 +5,13 @@ using Xamarin.Forms.Xaml;
 namespace SportLeagueRD.View {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class view_splashApp : ContentPage {
-        public view_splashApp() {
+        public view_splashApp(bool llamarCalendario) {
             InitializeComponent();
 
             Application.Current.MainPage = new NavigationPage(this);
+
+            if (!llamarCalendario)
+                return;
 
             LlamarVentanaCalendario();
         }
